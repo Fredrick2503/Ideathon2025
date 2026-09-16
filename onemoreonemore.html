@@ -1,0 +1,1161 @@
+<!DOCTYPE html><html lang="en" style=""><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ideathon 2026 — AICTE IDEA LAB @ NHCE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0F1B38;
+  --navy-2:#16244A;
+  --ink:#141A24;
+  --paper:#F6F4EF;
+  --paper-2:#FFFFFF;
+  --orange:#EA580C;
+  --orange-2:#FF8A3D;
+  --teal:#12A9A0;
+  --line:#E4E0D6;
+  --muted:#5B6270;
+  --gold:#D97706;
+  --silver:#64748B;
+  --bronze:#B45309;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.display{
+  font-family:'Inter',sans-serif;
+  letter-spacing:0;
+}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+.narrow{max-width:760px;margin:0 auto;padding:0 24px;}
+
+/* ---------- reveal ---------- */
+[data-reveal]{opacity:0;transform:translateY(28px) scale(.985);transition:opacity 1.05s cubic-bezier(.16,1,.3,1),transform 1.05s cubic-bezier(.16,1,.3,1);will-change:opacity,transform;}
+[data-reveal].in{opacity:1;transform:translateY(0);}
+[data-reveal-group] > *{transition-delay:calc(var(--i,0) * 130ms);}
+@media (prefers-reduced-motion: reduce){
+  [data-reveal]{opacity:1!important;transform:none!important;transition:none!important;}
+  html{scroll-behavior:auto;}
+}
+
+/* ---------- top bar ---------- */
+#topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(246,244,239,.96);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+#topbar .inner{
+  display:flex;align-items:center;justify-content:space-between;
+  min-height:72px;padding:0 24px;max-width:1120px;margin:0 auto;gap:16px;
+}
+#topbar .brand{display:flex;align-items:center;}
+#topbar .brand img{width:250px;height:72px;object-fit:contain;}
+#topbar nav{display:flex;gap:22px;}
+#topbar nav a{color:var(--muted);font-size:.88rem;font-weight:500;transition:color .2s;}
+#topbar nav a:hover{color:var(--navy);}
+#topbar .partner-logos{display:flex;align-items:center;gap:14px;}
+#topbar .partner-logos img{width:54px;height:42px;object-fit:contain;}
+#topbar .partner-logos img:last-child{width:62px;}
+@media (max-width:820px){ #topbar nav{display:none;} }
+
+/* ---------- hero ---------- */
+#hero{
+  position:relative;overflow:hidden;
+  background:
+    linear-gradient(rgba(15,48,112,.78),rgba(15,27,56,.88)),
+    url("bg.png") center center / cover no-repeat;
+  padding:120px 24px 96px;
+  color:#fff;
+}
+#hero .inner{max-width:900px;margin:0 auto;text-align:center;position:relative;z-index:2;}
+#hero .kicker{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.82rem;color:rgba(255,255,255,.85);
+  margin-bottom:26px;font-weight:500;
+  background:rgba(255,255,255,0.08);padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.15);
+}
+#hero .kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--orange-2);box-shadow:0 0 8px var(--orange);}
+#hero h1{
+  font-size:clamp(2.6rem,6vw,4.4rem);
+  font-weight:700;line-height:1.04;margin:0 0 18px;color:#fff;
+}
+#hero h1 em{font-style:italic;color:var(--orange-2);}
+#hero .sub{
+  font-size:clamp(1.05rem,1.6vw,1.3rem);color:rgba(255,255,255,.85);
+  font-weight:400;max-width:640px;margin:0 auto 40px;line-height:1.5;
+}
+#hero .actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+#register-button{
+  background:var(--orange);color:#fff;font-weight:600;font-size:1.02rem;
+  padding:16px 34px;border-radius:999px;border:none;cursor:pointer;
+  transition:transform .25s, box-shadow .25s, background .25s;
+  box-shadow:0 12px 30px -10px rgba(234,88,12,.6);
+  display:inline-flex;align-items:center;gap:10px;
+}
+#register-button:hover{transform:translateY(-2px);background:var(--orange-2);}
+#veiw-button{
+  background:rgba(255,255,255,.06);color:#fff;font-weight:600;font-size:1.02rem;
+  padding:16px 34px;border-radius:999px;border:1px solid rgba(255,255,255,.25);cursor:pointer;
+  transition:transform .25s, background .25s;
+  display:inline-flex;align-items:center;gap:10px;
+}
+#veiw-button:hover{transform:translateY(-2px);background:rgba(255,255,255,.14);}
+
+/* ---------- registration overlay ---------- */
+body.registration-open{overflow:hidden;}
+#registrationOverlay{
+  position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;
+  padding:24px;background:rgba(15,27,56,.62);backdrop-filter:blur(8px);
+  opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s ease;
+}
+#registrationOverlay.is-open{opacity:1;visibility:visible;}
+#registrationOverlay .registration-dialog{
+  position:relative;width:min(960px,100%);height:min(92vh,900px);background:var(--paper-2);
+  border:1px solid rgba(255,255,255,.7);border-radius:18px;overflow:hidden;
+  box-shadow:0 28px 80px rgba(15,27,56,.35);transform:translateY(20px) scale(.98);
+  transition:transform .55s cubic-bezier(.16,1,.3,1);
+}
+#registrationOverlay.is-open .registration-dialog{transform:translateY(0) scale(1);}
+#registrationOverlay iframe{display:block;width:100%;height:100%;border:0;background:var(--paper);}
+#registrationOverlay .close-registration{
+  position:absolute;top:14px;right:14px;z-index:2;width:38px;height:38px;border:0;border-radius:50%;
+  background:rgba(15,27,56,.86);color:#fff;font-size:1.5rem;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(15,27,56,.22);
+}
+#registrationOverlay .close-registration:hover{background:var(--orange);}
+@media (max-width:600px){#registrationOverlay{padding:10px;}#registrationOverlay .registration-dialog{height:94vh;border-radius:14px;}#registrationOverlay .close-registration{top:10px;right:10px;}}
+@media (prefers-reduced-motion:reduce){#registrationOverlay,#registrationOverlay .registration-dialog{transition:none;}}
+
+/* ---------- section basics ---------- */
+section{padding:96px 0;}
+.section-head{max-width:600px;margin-bottom:56px;}
+.section-head .eyebrow{
+  font-size:.8rem;color:var(--orange);font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.06em;
+}
+.section-head h2{font-size:clamp(1.9rem,3vw,2.6rem);font-weight:600;color:var(--ink);margin:0 0 14px;line-height:1.1;}
+.section-head p{font-size:1.08rem;color:var(--muted);line-height:1.6;margin:0;}
+.rule{width:100%;height:1px;background:var(--line);}
+
+/* ---------- organized-by strip ---------- */
+#orgby{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;}
+#orgby .row{max-width:1120px;margin:0 auto;padding:22px 24px;display:flex;align-items:center;justify-content:center;gap:32px;}
+#orgby .label{display:block;flex:0 0 auto;text-align:left;font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0;}
+.logo-marquee{position:relative;overflow:hidden;padding:4px 0;}
+.logo-marquee::before,.logo-marquee::after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:2;pointer-events:none;}
+.logo-marquee::before{left:0;background:linear-gradient(90deg,var(--paper-2),transparent);}
+.logo-marquee::after{right:0;background:linear-gradient(270deg,var(--paper-2),transparent);}
+.logo-marquee{flex:0 0 738px;width:738px;max-width:100%;min-width:0;}
+.logo-track{display:flex;width:max-content;align-items:center;animation:logo-scroll 24s linear infinite;}
+.logo-marquee:hover .logo-track{animation-play-state:paused;}
+.logo-item{width:210px;height:82px;margin:0 18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.logo-item img{width:100%;height:100%;object-fit:contain;}
+@keyframes logo-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@media (prefers-reduced-motion:reduce){.logo-track{animation:none;transform:none;}.logo-track .logo-item:nth-child(n+4){display:none;}}
+@media (max-width:600px){.logo-item{width:150px;height:64px;margin:0 10px;}.logo-marquee::before,.logo-marquee::after{width:42px;}}
+@media (max-width:600px){#orgby .row{align-items:stretch;flex-direction:column;gap:14px;padding:18px 20px 22px;}#orgby .label{flex:0 0 auto;text-align:center;}.logo-marquee{width:100%;flex:0 0 auto;}}
+
+/* ---------- about ---------- */
+#about{background:var(--paper-2);}
+#about .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:start;}
+#about .copy p{font-size:1.08rem;line-height:1.7;color:#333;margin:0 0 20px;}
+#about .highlight{
+  font-size:1.15rem;font-style:italic;color:var(--navy);
+  border-left:3px solid var(--orange);padding-left:20px;margin-top:28px;
+  font-family:'Inter',sans-serif;line-height:1.5;
+}
+#stats{display:flex;flex-direction:column;gap:0;background:var(--navy);border-radius:18px;overflow:hidden;box-shadow:0 20px 40px -15px rgba(15,27,56,0.3);}
+#stats .stat{padding:28px 32px;border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:20px;}
+#stats .stat:last-child{border-bottom:none;}
+#stats .stat-icon{
+  width:48px;height:48px;border-radius:12px;background:rgba(255,255,255,0.07);
+  display:flex;align-items:center;justify-content:center;color:var(--orange-2);flex-shrink:0;
+}
+#stats .stat-info{flex:1;}
+#stats .stat .val{font-family:'Inter',sans-serif;font-size:2.4rem;font-weight:700;color:#fff;line-height:1;}
+#stats .stat .lab{color:rgba(255,255,255,.65);font-size:.9rem;margin-top:6px;}
+@media (max-width:860px){ #about .grid{grid-template-columns:1fr;gap:40px;} }
+
+/* ---------- eligibility ---------- */
+#eligibility{background:var(--paper);}
+.elig-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+.elig-card{background:var(--paper-2);padding:32px 24px;transition:background .25s;}
+.elig-card:hover{background:#fff8f2;}
+.elig-icon-wrap{
+  width:42px;height:42px;border-radius:10px;background:#FFF0E6;color:var(--orange);
+  display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+}
+.elig-card h3{font-size:1.1rem;font-weight:700;margin:0 0 8px;color:var(--ink);}
+.elig-card p{font-size:.92rem;color:var(--muted);margin:0;line-height:1.5;}
+.note-box{
+  margin-top:40px;background:var(--navy);color:#fff;border-radius:16px;padding:36px 40px;
+}
+.note-box-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.note-box-header svg{width:24px;height:24px;color:var(--orange-2);}
+.note-box h3{font-size:1.3rem;margin:0;font-weight:600;color:#fff;}
+.note-box p{color:rgba(255,255,255,.78);line-height:1.6;margin:0 0 10px;font-size:.98rem;display:flex;align-items:flex-start;gap:10px;}
+.note-box p svg{width:16px;height:16px;color:var(--teal);flex-shrink:0;margin-top:4px;}
+@media (max-width:860px){ .elig-grid{grid-template-columns:1fr 1fr;} }
+@media (max-width:520px){ .elig-grid{grid-template-columns:1fr;} }
+
+/* ---------- tracks ---------- */
+#tracks{background:var(--paper-2);}
+.tracks-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.track-card{
+  background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:32px;
+  transition:border-color .25s, transform .25s, box-shadow .25s;
+}
+.track-card:hover{border-color:var(--orange);transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(20,26,36,.25);}
+.track-header{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.track-badge{
+  width:44px;height:44px;border-radius:12px;background:#FFF0E6;color:var(--orange);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.track-card h3{font-size:1.3rem;font-weight:600;color:var(--navy);margin:0;}
+.track-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;}
+.track-card li{display:flex;gap:12px;font-size:.95rem;color:#3a3f47;line-height:1.5;}
+.track-card li svg{width:16px;height:16px;color:var(--teal);margin-top:3px;flex-shrink:0;}
+@media (max-width:820px){ .tracks-grid{grid-template-columns:1fr;} }
+
+/* ---------- rules ---------- */
+#rules{background:var(--paper);}
+.rules-box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:44px;}
+.rules-box ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;}
+.rules-box li{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--line);font-size:1.02rem;color:#2c2f36;line-height:1.5;align-items:flex-start;}
+.rules-box li:last-child{border-bottom:none;}
+.rule-check-icon{
+  width:22px;height:22px;border-radius:50%;background:#FFF0E6;color:var(--orange);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;
+}
+.rules-box li strong{color:var(--navy);}
+
+/* ---------- prizes ---------- */
+#prizes{
+  background:linear-gradient(180deg,var(--navy) 0%, var(--navy-2) 100%);color:#fff;
+}
+#prizes .section-head h2, #prizes .section-head p{color:#fff;}
+#prizes .section-head p{color:rgba(255,255,255,.72);}
+#prizes .pool{text-align:center;margin-bottom:48px;}
+#prizes .pool .amount{font-family:'Inter',sans-serif;font-size:clamp(3rem,7vw,4.6rem);font-weight:700;color:var(--orange-2);}
+#prizes .pool .cap{color:rgba(255,255,255,.65);font-size:1.05rem;margin-top:6px;}
+.placements{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.place-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:20px;
+  padding:36px 24px;text-align:center;transition:transform .25s, border-color .25s;
+}
+.place-card:hover{transform:translateY(-4px);}
+.place-card.first{background:rgba(255,138,61,.12);border-color:rgba(255,138,61,.4);box-shadow:0 12px 30px rgba(234,88,12,0.15);}
+.place-badge-wrap{
+  width:64px;height:64px;margin:0 auto 16px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+}
+.place-card.first .place-badge-wrap{background:linear-gradient(135deg, #F59E0B, #B45309);color:#FFF;box-shadow:0 6px 16px rgba(245,158,11,0.35);}
+.place-card.second .place-badge-wrap{background:linear-gradient(135deg, #94A3B8, #475569);color:#FFF;box-shadow:0 6px 16px rgba(148,163,184,0.3);}
+.place-card.third .place-badge-wrap{background:linear-gradient(135deg, #D97706, #78350F);color:#FFF;box-shadow:0 6px 16px rgba(217,119,6,0.25);}
+.place-badge-wrap svg{width:32px;height:32px;}
+.place-card h4{margin:0 0 8px;font-size:1.1rem;font-weight:600;color:rgba(255,255,255,.9);}
+.place-card .amt{font-family:'Inter',sans-serif;font-size:2rem;font-weight:700;color:#fff;}
+.cert-note{
+  margin-top:36px;background:rgba(18,169,160,.12);border:1px solid rgba(18,169,160,.35);
+  border-radius:14px;padding:20px 28px;text-align:center;color:#d6f5f2;font-size:1rem;font-weight:500;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+}
+.cert-note svg{width:22px;height:22px;color:var(--teal);flex-shrink:0;}
+@media (max-width:720px){ .placements{grid-template-columns:1fr;} }
+
+/* ---------- registration ---------- */
+#registration{background:var(--paper-2);}
+.reg-panel{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:48px;}
+.reg-panel h3{font-size:1.4rem;font-weight:600;color:var(--navy);margin:0 0 28px;text-align:center;}
+.reg-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.reg-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;}
+.reg-card-icon{
+  width:40px;height:40px;border-radius:10px;background:#FFF0E6;color:var(--orange);
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+}
+.reg-card h4{margin:0 0 8px;font-size:1.02rem;font-weight:700;color:var(--ink);}
+.reg-card p{margin:0;font-size:.92rem;color:var(--muted);line-height:1.5;}
+.reg-note{text-align:center;color:var(--muted);font-size:.95rem;margin-top:28px;line-height:1.6;}
+.reg-cta{display:flex;justify-content:center;margin-top:32px;}
+@media (max-width:820px){ .reg-cards{grid-template-columns:1fr;} }
+
+footer{
+  background:var(--navy);color:rgba(255,255,255,.6);text-align:center;padding:36px 24px;font-size:.88rem;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+</style>
+<style>[data-reveal-group].in > *{opacity:1!important;transform:translateY(0)!important;}</style><style id="podium-styles" class="">
+#placements {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+  gap: 28px !important;
+  max-width: 960px !important;
+  margin: 0 auto !important;
+}
+.place-card {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  border-radius: 24px !important;
+  transition: transform 0.3s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.3s ease !important;
+  overflow: hidden;
+}
+.place-card:hover {
+  transform: translateY(-6px) !important;
+}
+
+/* FIRST PLACE / GOLD */
+.place-card.first {
+  order: 2;
+  flex: 1.15 !important;
+  min-height: 330px !important;
+  padding: 44px 28px 36px !important;
+  background: radial-gradient(130% 100% at 50% 0%, rgba(251, 191, 36, 0.22) 0%, rgba(217, 119, 6, 0.1) 60%, rgba(15, 27, 56, 0.95) 100%) !important;
+  border: 2px solid rgba(251, 191, 36, 0.75) !important;
+  box-shadow: 0 0 45px -8px rgba(245, 158, 11, 0.45), 0 20px 40px -15px rgba(0, 0, 0, 0.6), inset 0 1px 1px 0 rgba(255, 255, 255, 0.4) !important;
+  z-index: 3;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.place-card.first::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #FDE68A, #F59E0B, transparent);
+}
+.place-card.first .place-badge-wrap {
+  width: 72px !important;
+  height: 72px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 45%, #B45309 100%) !important;
+  color: #FFF !important;
+  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.5), inset 0 2px 4px rgba(255, 255, 255, 0.6) !important;
+  border: 2px solid rgba(254, 240, 138, 0.6) !important;
+  margin-bottom: 16px !important;
+}
+.place-card.first .podium-rank-tag {
+  background: linear-gradient(90deg, rgba(251, 191, 36, 0.3), rgba(217, 119, 6, 0.25)) !important;
+  color: #FDE047 !important;
+  border: 1px solid rgba(253, 224, 71, 0.6) !important;
+  box-shadow: 0 0 14px rgba(251, 191, 36, 0.25) !important;
+  font-size: 0.76rem !important;
+}
+.place-card.first h4 {
+  color: #FEF08A !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+}
+.place-card.first .amt {
+  font-size: 2.75rem !important;
+  font-weight: 800 !important;
+  background: linear-gradient(180deg, #FFFFFF 20%, #FDE047 70%, #F59E0B 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 2px 10px rgba(245, 158, 11, 0.45)) !important;
+  margin-top: 4px !important;
+}
+
+/* SECOND PLACE / SILVER */
+.place-card.second {
+  order: 1;
+  flex: 1 !important;
+  min-height: 265px !important;
+  padding: 34px 24px 28px !important;
+  background: radial-gradient(120% 90% at 50% 0%, rgba(226, 232, 240, 0.18) 0%, rgba(148, 163, 184, 0.08) 55%, rgba(15, 27, 56, 0.95) 100%) !important;
+  border: 1.5px solid rgba(203, 213, 225, 0.5) !important;
+  box-shadow: 0 0 32px -8px rgba(148, 163, 184, 0.3), 0 16px 36px -12px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.35) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.place-card.second::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, #FFFFFF, #CBD5E1, transparent);
+}
+.place-card.second .place-badge-wrap {
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #F8FAFC 0%, #CBD5E1 45%, #64748B 100%) !important;
+  color: #0F172A !important;
+  box-shadow: 0 6px 20px rgba(148, 163, 184, 0.4), inset 0 2px 3px rgba(255, 255, 255, 0.8) !important;
+  border: 2px solid rgba(255, 255, 255, 0.7) !important;
+  margin-bottom: 14px !important;
+}
+.place-card.second .podium-rank-tag {
+  background: linear-gradient(90deg, rgba(226, 232, 240, 0.25), rgba(148, 163, 184, 0.2)) !important;
+  color: #F1F5F9 !important;
+  border: 1px solid rgba(226, 232, 240, 0.45) !important;
+  box-shadow: 0 0 10px rgba(203, 213, 225, 0.2) !important;
+}
+.place-card.second h4 {
+  color: #E2E8F0 !important;
+  font-size: 1.15rem !important;
+  font-weight: 600 !important;
+}
+.place-card.second .amt {
+  font-size: 2.2rem !important;
+  font-weight: 800 !important;
+  background: linear-gradient(180deg, #FFFFFF 30%, #CBD5E1 75%, #94A3B8 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  filter: drop-shadow(0 2px 8px rgba(148, 163, 184, 0.35)) !important;
+  margin-top: 4px !important;
+}
+
+/* THIRD PLACE / BRONZE */
+.place-card.third {
+  order: 3;
+  flex: 1 !important;
+  min-height: 220px !important;
+  padding: 28px 20px 24px !important;
+  background: radial-gradient(120% 90% at 50% 0%, rgba(217, 119, 6, 0.14) 0%, rgba(180, 83, 9, 0.05) 55%, rgba(15, 27, 56, 0.95) 100%) !important;
+  border: 1px solid rgba(217, 119, 6, 0.38) !important;
+  box-shadow: 0 0 24px -8px rgba(217, 119, 6, 0.22), 0 12px 30px -10px rgba(0, 0, 0, 0.45) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.place-card.third .place-badge-wrap {
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, #FDBA74 0%, #D97706 50%, #78350F 100%) !important;
+  color: #FFF !important;
+  box-shadow: 0 4px 16px rgba(180, 83, 9, 0.3), inset 0 1px 2px rgba(255, 255, 255, 0.4) !important;
+  border: 1.5px solid rgba(253, 186, 116, 0.45) !important;
+  margin-bottom: 12px !important;
+}
+.place-card.third .podium-rank-tag {
+  background: rgba(217, 119, 6, 0.2) !important;
+  color: #FDBA74 !important;
+  border: 1px solid rgba(217, 119, 6, 0.4) !important;
+}
+.place-card.third h4 {
+  color: #FED7AA !important;
+  font-size: 1.05rem !important;
+}
+.place-card.third .amt {
+  font-size: 1.9rem !important;
+  font-weight: 700 !important;
+  color: #FED7AA !important;
+  margin-top: 4px !important;
+}
+
+.podium-rank-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 720px) {
+  #placements {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 20px !important;
+  }
+  .place-card.first, .place-card.second, .place-card.third {
+    order: unset !important;
+    min-height: auto !important;
+    flex: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="topbar">
+  <div class="inner">
+    <div class="brand">
+      <img src="nhce.png" alt="New Horizon College of Engineering">
+    </div>
+    <nav>
+      <a href="#about" class="">About</a>
+      <a href="#eligibility" class="">Eligibility</a>
+      <a href="#tracks" class="">Tracks</a>
+      <a href="#prizes" class="">Prizes</a>
+      <a href="#registration" class="">Register</a>
+    </nav>
+    <div class="partner-logos" aria-label="AICTE and AICTE IDEA Lab">
+      <img src="aicte.png" alt="AICTE">
+      <img src="idealab.png" alt="AICTE IDEA Lab">
+    </div>
+  </div>
+</div>
+
+<div id="registrationOverlay" role="dialog" aria-modal="true" aria-label="Ideathon registration form" aria-hidden="true">
+  <div class="registration-dialog">
+    <button type="button" class="close-registration" aria-label="Close registration form">&times;</button>
+    <iframe src="form.html" title="Ideathon registration form"></iframe>
+  </div>
+</div>
+
+<main>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="inner">
+    <div class="kicker">
+      <span class="dot"></span>
+      <span id="heroKicker" class="">National-Level Challenge</span>
+    </div>
+    <h1 id="heroTitle" class="">Ideathon 2026</h1>
+    <p class="sub" id="heroTagline">Collaborate, innovate, and launch solutions to real problems — with mentors, judges, and innovators from across India.</p>
+    <div class="actions">
+      <a href="#registration" class="">
+        <button id="register-button" class="">
+          <span id="register-button-text" class="">Register Now</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+        </button>
+      </a>
+      <a id="rulebookLink" download="" hidden="" href="Ideathon-2025-Rulebook.pdf" class="">
+        <button id="veiw-button" class="">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 6h10"></path><path d="M6 10h10"></path></svg>
+          <span id="view-button-text" class="">View Rulebook</span>
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ORGANIZED BY -->
+<div id="orgby">
+  <div class="row">
+    <span class="label">Organized by</span>
+    <div class="logo-marquee" aria-label="Organized by NHCE, AICTE, and AICTE IDEA Lab">
+      <div class="logo-track">
+        <div class="logo-item"><img src="nhce.png" alt="New Horizon College of Engineering"></div>
+        <div class="logo-item"><img src="aicte.png" alt="AICTE"></div>
+        <div class="logo-item"><img src="idealab.png" alt="AICTE IDEA Lab"></div>
+        <div class="logo-item" aria-hidden="true"><img src="nhce.png" alt=""></div>
+        <div class="logo-item" aria-hidden="true"><img src="aicte.png" alt=""></div>
+        <div class="logo-item" aria-hidden="true"><img src="idealab.png" alt=""></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="section-head in" data-reveal="">
+      <div class="eyebrow">About the event</div>
+      <h2 id="aboutTitle" class="">A national platform for real ideas</h2>
+    </div>
+    <div class="grid">
+      <div class="copy in" id="aboutParagraphs" data-reveal=""><p class="">Welcome to the National-Level AICTE IDEA LAB Ideathon at New Horizon College of Engineering! This dynamic platform brings together innovative minds from across the country to address real-world challenges.</p><p class="">It's your opportunity to collaborate with students nationwide, transform ideas into impactful solutions, and showcase your innovation to industry experts, mentors, and academicians.</p><p class="">The Ideathon goes beyond competition; it is a national platform for aspiring innovators to connect, create, and turn promising ideas into solutions with meaningful impact.</p><p class="highlight">Embark on a transformative national journey to build, learn, and launch the next big idea — and be part of shaping the future through innovation and collaboration.</p></div>
+      <div id="stats" data-reveal="" class="in">
+    <div class="stat">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7.5a1.5 1.5 0 0 0-1.5 1.5V21"></path><path d="M14 14.66V17c0 .55.45 1 1 1h1.5a1.5 1.5 0 0 1 1.5 1.5V21"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg></div>
+      <div class="stat-info">
+        <div class="val">₹80,000</div>
+        <div class="lab">Total prize pool</div>
+      </div>
+    </div>
+  
+    <div class="stat">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
+      <div class="stat-info">
+        <div class="val">4</div>
+        <div class="lab">Innovation tracks</div>
+      </div>
+    </div>
+  
+    <div class="stat">
+      <div class="stat-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><path d="M7 7h.01"></path></svg></div>
+      <div class="stat-info">
+        <div class="val">₹600</div>
+        <div class="lab">Registration fee</div>
+      </div>
+    </div>
+  </div>
+    </div>
+  </div>
+</section>
+
+<!-- ELIGIBILITY -->
+<section id="eligibility">
+  <div class="wrap">
+    <div class="section-head in" data-reveal="">
+      <div class="eyebrow">Who can join</div>
+      <h2 id="eligibilityTitle" class="">Eligibility criteria</h2>
+      <p id="eligibilitySubtitle" class="">Open to all UG/PG students in tech-related streams</p>
+    </div>
+    <div class="elig-grid in" id="eligibilityItems" data-reveal="" data-reveal-group="">
+    <div class="elig-card in" style="--i: 0; opacity: 0; transform: translateY(18px); transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);">
+      <div class="elig-icon-wrap"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg></div>
+      <h3 class="">B.E. / B.Tech</h3>
+      <p class="">All engineering streams</p>
+    </div>
+  
+    <div class="elig-card in" style="--i: 1; opacity: 0; transform: translateY(18px); transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);">
+      <div class="elig-icon-wrap"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg></div>
+      <h3 class="">M.E. / M.Tech</h3>
+      <p class="">All engineering streams</p>
+    </div>
+  
+    <div class="elig-card in" style="--i: 2; opacity: 0; transform: translateY(18px); transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);">
+      <div class="elig-icon-wrap"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg></div>
+      <h3 class="">BCA / MCA</h3>
+      <p class="">Computer applications</p>
+    </div>
+  
+    <div class="elig-card in" style="--i: 3; opacity: 0; transform: translateY(18px); transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);">
+      <div class="elig-icon-wrap"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg></div>
+      <h3 class="">BSc / MSc</h3>
+      <p class="">CS, IT, or related fields</p>
+    </div>
+  </div>
+    <div class="note-box in" data-reveal="">
+      <div class="note-box-header">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <h3 id="eligibilityNoteTitle" class="">Important notes</h3>
+      </div>
+      <div id="eligibilityNotes">
+    <p class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg> <span class="">All participants must carry a valid college ID at the venue.</span></p>
+  
+    <p class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg> <span class="">Interdisciplinary teams are highly encouraged to foster diverse perspectives and innovative solutions, but cross-college teams are not allowed.</span></p>
+  
+    
+  </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRACKS -->
+<section id="tracks">
+  <div class="wrap">
+    <div class="section-head in" data-reveal="">
+      <div class="eyebrow">Where to focus</div>
+      <h2 class="">Tracks &amp; problem statements</h2>
+      <p class="">Four national tracks, each with real problem statements designed to challenge innovators.</p>
+    </div>
+    <div class="tracks-grid in" id="tracksGrid" data-reveal="" data-reveal-group="">
+    <div class="track-card in" style="--i: 0; opacity: 0; transform: translateY(18px); transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);">
+      <div class="track-header">
+        <div class="track-badge"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></div>
+        <h3 class="">Disaster Management</h3>
+      </div>
+      <ul><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-1A: AI-driven fake news filter</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-1B: Dynamic evacuation routing system</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-1C: Digital system for missing persons</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-1D: Crowd stampede prevention</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-1E: Blockchain for aid transparency</span></li></ul>
+    </div>
+  
+    <div class="track-card in" style="--i: 1; opacity: 0; transform: translateY(18px); transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);">
+      <div class="track-header">
+        <div class="track-badge"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg></div>
+        <h3 class="">Fintech (Financial Technology)</h3>
+      </div>
+      <ul><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-2A: Inclusive digital credit assessment</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-2B: AI-enabled fraud detection in UPI</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-2C: Voice-first banking for rural users</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-2D: Gamified financial literacy platform for Gen Z</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-2E: Cross-border tuition payment system</span></li></ul>
+    </div>
+  
+    <div class="track-card in" style="--i: 2; opacity: 0; transform: translateY(18px); transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);">
+      <div class="track-header">
+        <div class="track-badge"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+        <h3 class="">Sustainable Energy Management</h3>
+      </div>
+      <ul><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-3A: Smart campus energy management</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-3B: Affordable solar energy storage</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-3C: Community waste-to-energy solution</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-3D: Green finance tracking application</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-3E: Vertical axis wind turbines for cities</span></li></ul>
+    </div>
+  
+    <div class="track-card in" style="--i: 3; opacity: 0; transform: translateY(18px); transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);">
+      <div class="track-header">
+        <div class="track-badge"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg></div>
+        <h3 class="">Smart Vehicles &amp; Transportation</h3>
+      </div>
+      <ul><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-5A: AI for traffic flow optimization</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-5B: Smart parking solution</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-5C: Intelligent EV charging network</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-5D: Affordable EV retrofit kits</span></li><li class=""><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg><span class="">PS-5E: Smart driver assistance for accident prevention</span></li></ul>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- RULES -->
+<section id="rules">
+  <div class="narrow">
+    <div class="section-head in" data-reveal="">
+      <div class="eyebrow">Before you register</div>
+      <h2 id="rulesTitle" class="">Rules &amp; guidelines</h2>
+    </div>
+    <div class="rules-box in" data-reveal="">
+      <ul id="rulesList">
+    <li class="">
+      <div class="rule-check-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+      <span class=""><strong>Team size:</strong> Teams can consist of 1 to 6 members. You can register as a solo innovator or as a team.</span>
+    </li>
+  
+    <li class="">
+      <div class="rule-check-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+      <span class=""><strong>Interdisciplinary teams:</strong> We highly encourage forming teams with students from different branches of study.</span>
+    </li>
+  
+    <li class="">
+      <div class="rule-check-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+      <span class=""><strong>Cross-college teams:</strong> Teams must be formed within the same college; inter-college teams are not allowed.</span>
+    </li>
+  
+    <li class="">
+      <div class="rule-check-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+      <span class=""><strong>Originality:</strong> Your idea must be your own work, developed for this event.</span>
+    </li>
+  
+    <li class="">
+      <div class="rule-check-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+      <span class=""><strong>Respect:</strong> Treat all participants, mentors, judges, and organizers with respect.</span>
+    </li>
+  
+    <li class="">
+      <div class="rule-check-icon"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+      <span class="">Judges' decision is final.</span>
+    </li>
+  </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PRIZES -->
+<section id="prizes">
+  <div class="wrap">
+    <div class="section-head in" style="margin:0 auto 56px;text-align:center;" data-reveal="">
+      <div class="eyebrow" style="color: var(--orange-2);">What you can win</div>
+      <h2 id="prizesTitle" class="">Prizes &amp; recognition</h2>
+    </div>
+    <div class="pool in" data-reveal="">
+      <div class="amount" id="prizePool">₹80,000</div>
+      <div class="cap" id="prizePoolText">Total prize pool across 4 tracks</div>
+    </div>
+    <div class="placements in" id="placements" data-reveal="" data-reveal-group=""><div class="place-card second in" style="--i: 0;" data-stitch-orig-opacity="1"><span class="podium-rank-tag">Rank #2 · Silver</span>
+<div class="place-badge-wrap">
+  <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="9" r="6"></circle>
+    <circle cx="12" cy="9" r="3.5" stroke-dasharray="2 2"></circle>
+    <path d="M8.21 13.89 7 22l5-3 5 3-1.21-8.11"></path>
+  </svg>
+</div>
+<h4 class="">Second Place</h4>
+<div class="amt">₹6,000</div></div>
+    <div class="place-card first in" style="--i: 1;" data-stitch-orig-opacity="1"><span class="podium-rank-tag">★ Rank #1 · Champion ★</span>
+<div class="place-badge-wrap">
+  <svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+    <path d="M4 22h16"></path>
+    <path d="M10 14.66V17c0 .55-.45 1-1 1H7.5a1.5 1.5 0 0 0-1.5 1.5V21"></path>
+    <path d="M14 14.66V17c0 .55.45 1 1 1h1.5a1.5 1.5 0 0 1 1.5 1.5V21"></path>
+    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+  </svg>
+</div>
+<h4 class="">First Place</h4>
+<div class="amt">₹10,000</div></div>
+    <div class="place-card third in" style="--i: 2;" data-stitch-orig-opacity="1"><span class="podium-rank-tag">Rank #3 · Bronze</span>
+<div class="place-badge-wrap">
+  <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+  </svg>
+</div>
+<h4 class="">Third Place</h4>
+<div class="amt">₹4,000</div></div></div>
+    <div class="cert-note in" id="certificateText" data-reveal=""><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg> <span class="">All valid teams receive verified participation certificates</span></div>
+  </div>
+</section>
+
+<!-- REGISTRATION -->
+<section id="registration">
+  <div class="narrow">
+    <div class="section-head in" style="text-align:center;margin:0 auto 40px;" data-reveal="">
+      <div class="eyebrow">Last step</div>
+      <h2 id="registrationTitle" class="">Register now and join the challenge</h2>
+      <p id="registrationSubtitle" class="">Take the first step — secure your spot today.</p>
+    </div>
+    <div class="reg-panel in" data-reveal="">
+      <h3 id="registrationInfoTitle" class="">Registration information</h3>
+      <div class="reg-cards" id="registrationCards">
+    <div class="reg-card">
+      <div class="reg-card-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg></div>
+      <h4 class="">Registration fee</h4>
+      <p class="">A non-refundable registration fee of ₹600 per team is required to confirm your spot.</p>
+    </div>
+  
+    <div class="reg-card">
+      <div class="reg-card-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg></div>
+      <h4 class="">Registration deadline</h4>
+      <p class="">The deadline for registration is October 25, 2026. All teams must register online before this date.</p>
+    </div>
+  
+    <div class="reg-card">
+      <div class="reg-card-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="M15 8h2"></path><path d="M15 12h2"></path><path d="M7 16h10"></path></svg></div>
+      <h4 class="">Required documents</h4>
+      <p class="">All participants must carry their valid college ID card for verification at the venue on the day of the event.</p>
+    </div>
+  </div>
+      <p class="reg-note" id="registrationNote">Please save your proof of payment and upload a valid copy during form submission. Payments will be verified at the time of the competition.</p>
+      <div class="reg-cta">
+        <a href="#registration" id="registrationFormLink" class="">
+          <button id="register-button-2" style="background: var(--orange); color: rgb(255, 255, 255); font-weight: 600; font-size: 1rem; padding: 15px 34px; border-radius: 999px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; box-shadow: rgba(234, 88, 12, 0.5) 0px 10px 25px -5px;" class="">
+            <span class="">Go to registration form</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div id="footerText" class="">Ideathon 2026 · AICTE IDEA LAB @ New Horizon College of Engineering</div>
+</footer>
+
+<!-- SINGLE DATA SOURCE -->
+<script id="page-data" type="application/json">{
+  "hero": {
+    "title": "Ideathon 2026",
+    "kicker": "National-Level Challenge",
+    "tagline": "Collaborate, innovate, and launch solutions to real problems — with mentors, judges, and innovators from across India.",
+    "registerText": "Register Now",
+    "rulebookText": "View Rulebook",
+    "rulebookUrl": "Ideathon-2025-Rulebook.pdf"
+  },
+  "about": {
+    "title": "A National platform for real ideas",
+    "paragraphs": [
+      "Welcome to the National-Level AICTE IDEA LAB Ideathon at New Horizon College of Engineering! This dynamic platform brings together innovative minds from across the country to address real-world challenges.",
+      "It's your opportunity to collaborate with students nationwide, transform ideas into impactful solutions, and showcase your innovation to industry experts, mentors, and academicians.",
+      "The Ideathon goes beyond competition; it is a national platform for aspiring innovators to connect, create, and turn promising ideas into solutions with meaningful impact."
+    ],
+    "highlight": "Embark on a transformative national journey to build, learn, and launch the next big idea and be part of shaping the future through innovation and collaboration.",
+    "stats": [
+      { "value": "₹80,000", "label": "Total prize pool", "icon": "trophy" },
+      { "value": "4", "label": "Innovation tracks", "icon": "layers" },
+      { "value": "₹600", "label": "Registration fee", "icon": "tag" }
+    ]
+  },
+  "eligibility": {
+    "title": "Eligibility criteria",
+    "subtitle": "Open to all UG/PG students in tech-related streams",
+    "items": [
+      { "title": "B.E. / B.Tech", "description": "All engineering streams", "icon": "cpu" },
+      { "title": "M.E. / M.Tech", "description": "All engineering streams", "icon": "compass" },
+      { "title": "BCA / MCA", "description": "Computer applications", "icon": "code" },
+      { "title": "BSc / MSc", "description": "CS, IT, or related fields", "icon": "database" }
+    ],
+    "noteTitle": "Important notes",
+    "notes": [
+      "All participants must carry a valid college ID at the venue.",
+      "Interdisciplinary teams are highly encouraged but cross-college teams are not allowed."
+    ]
+  },
+  "tracks": [
+    {
+      "title": "Disaster Management",
+      "icon": "shield-alert",
+      "problems": [
+        "PS-1A: AI-driven fake news filter",
+        "PS-1B: Dynamic evacuation routing system",
+        "PS-1C: Digital system for missing persons",
+        "PS-1D: Crowd stampede prevention",
+        "PS-1E: Blockchain for aid transparency"
+      ]
+    },
+    {
+      "title": "Fintech (Financial Technology)",
+      "icon": "credit-card",
+      "problems": [
+        "PS-2A: Inclusive digital credit assessment",
+        "PS-2B: AI-enabled fraud detection in UPI",
+        "PS-2C: Voice-first banking for rural users",
+        "PS-2D: Gamified financial literacy platform for Gen Z",
+        "PS-2E: Cross-border tuition payment system"
+      ]
+    },
+    {
+      "title": "Sustainable Energy Management",
+      "icon": "zap",
+      "problems": [
+        "PS-3A: Smart campus energy management",
+        "PS-3B: Affordable solar energy storage",
+        "PS-3C: Community waste-to-energy solution",
+        "PS-3D: Green finance tracking application",
+        "PS-3E: Vertical axis wind turbines for cities"
+      ]
+    },
+    {
+      "title": "Smart Vehicles & Transportation",
+      "icon": "navigation",
+      "problems": [
+        "PS-5A: AI for traffic flow optimization",
+        "PS-5B: Smart parking solution",
+        "PS-5C: Intelligent EV charging network",
+        "PS-5D: Affordable EV retrofit kits",
+        "PS-5E: Smart driver assistance for accident prevention"
+      ]
+    }
+  ],
+  "rules": {
+    "title": "Rules & guidelines",
+    "items": [
+      { "label": "Team size:", "text": "Teams can consist of 1 to 6 members. You can register as a solo innovator or as a team." },
+      { "label": "Interdisciplinary teams:", "text": "We highly encourage forming teams with students from different branches of study." },
+      { "label": "Cross-college teams:", "text": "Teams must be formed within the same college; inter-college teams are not allowed." },
+      { "label": "Originality:", "text": "Your idea must be your own work, developed for this event." },
+      { "label": "Respect:", "text": "Treat all participants, mentors, judges, and organizers with respect." },
+      { "label": "Results:", "text": "Judges' decision is final." }
+    ]
+  },
+  "prizes": {
+    "title": "Prizes & recognition",
+    "pool": "₹80,000",
+    "poolText": "Total prize pool across 4 tracks",
+    "placements": [
+      { "type": "first", "title": "First Place", "amount": "₹10,000", "class": "first" },
+      { "type": "second", "title": "Second Place", "amount": "₹6,000", "class": "second" },
+      { "type": "third", "title": "Third Place", "amount": "₹4,000", "class": "third" }
+    ],
+    "certificateText": "All valid teams receive verified participation certificates"
+  },
+  "registration": {
+    "title": "Register now and join the challenge",
+    "subtitle": "Take the first step — secure your spot today.",
+    "infoTitle": "Registration information",
+    "cards": [
+      { "title": "Registration fee", "text": "A non-refundable registration fee of ₹600 per team is required to confirm your spot.", "icon": "wallet" },
+      { "title": "Registration deadline", "text": "The deadline for registration is October 25, 2026. All teams must register online before this date.", "icon": "calendar" },
+      { "title": "Required documents", "text": "All participants must carry their valid college ID card for verification at the venue on the day of the event.", "icon": "id-card" }
+    ],
+    "note": "Please save your proof of payment and upload a valid copy during form submission. Payments will be verified at the time of the competition.",
+    "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLSer3SiXDCv8ejOk-f_1FMDRg7PydpzC9QrV0lPCeA49qhDp/viewform"
+  },
+  "footer": "Ideathon 2026 · AICTE IDEA LAB @ New Horizon College of Engineering"
+}</script>
+
+<script>
+(function () {
+  "use strict";
+
+  // Vector SVG Icon Repository
+  const vectorIcons = {
+    trophy: `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7.5a1.5 1.5 0 0 0-1.5 1.5V21"></path><path d="M14 14.66V17c0 .55.45 1 1 1h1.5a1.5 1.5 0 0 1 1.5 1.5V21"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>`,
+    layers: `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>`,
+    tag: `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"></path><path d="M7 7h.01"></path></svg>`,
+    cpu: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>`,
+    compass: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>`,
+    code: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>`,
+    database: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>`,
+    "shield-alert": `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`,
+    "credit-card": `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>`,
+    zap: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>`,
+    navigation: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>`,
+    wallet: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg>`,
+    calendar: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>`,
+    "id-card": `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="M15 8h2"></path><path d="M15 12h2"></path><path d="M7 16h10"></path></svg>`,
+    award: `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>`,
+    firstPlaceBadge: `<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7.5a1.5 1.5 0 0 0-1.5 1.5V21"></path><path d="M14 14.66V17c0 .55.45 1 1 1h1.5a1.5 1.5 0 0 1 1.5 1.5V21"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>`,
+    secondPlaceBadge: `<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>`,
+    thirdPlaceBadge: `<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`,
+    check: `<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`,
+    chevronRight: `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>`
+  };
+
+  const data = JSON.parse(document.getElementById("page-data").textContent);
+  const el = (id) => document.getElementById(id);
+  const setText = (id, value) => { if (el(id)) el(id).textContent = value ?? ""; };
+
+  // Hero
+  setText("heroKicker", data.hero.kicker);
+  setText("heroTitle", data.hero.title);
+  setText("heroTagline", data.hero.tagline);
+  setText("register-button-text", data.hero.registerText);
+  setText("view-button-text", data.hero.rulebookText);
+  if (el("rulebookLink")) el("rulebookLink").href = data.hero.rulebookUrl;
+
+  // About
+  setText("aboutTitle", data.about.title);
+  el("aboutParagraphs").innerHTML = data.about.paragraphs.map(t => `<p>${t}</p>`).join("") +
+    `<p class="highlight">${data.about.highlight}</p>`;
+  el("stats").innerHTML = data.about.stats.map(s => `
+    <div class="stat">
+      <div class="stat-icon">${vectorIcons[s.icon] || vectorIcons.trophy}</div>
+      <div class="stat-info">
+        <div class="val">${s.value}</div>
+        <div class="lab">${s.label}</div>
+      </div>
+    </div>
+  `).join("");
+
+  // Eligibility
+  setText("eligibilityTitle", data.eligibility.title);
+  setText("eligibilitySubtitle", data.eligibility.subtitle);
+  el("eligibilityItems").innerHTML = data.eligibility.items.map((item, i) => `
+    <div class="elig-card" style="--i:${i}">
+      <div class="elig-icon-wrap">${vectorIcons[item.icon] || vectorIcons.cpu}</div>
+      <h3>${item.title}</h3>
+      <p>${item.description}</p>
+    </div>
+  `).join("");
+  setText("eligibilityNoteTitle", data.eligibility.noteTitle);
+  el("eligibilityNotes").innerHTML = data.eligibility.notes.map(n => `
+    <p>${vectorIcons.chevronRight} <span>${n}</span></p>
+  `).join("");
+
+  // Tracks
+  el("tracksGrid").innerHTML = data.tracks.map((track, i) => `
+    <div class="track-card" style="--i:${i}">
+      <div class="track-header">
+        <div class="track-badge">${vectorIcons[track.icon] || vectorIcons.layers}</div>
+        <h3>${track.title}</h3>
+      </div>
+      <ul>${track.problems.map(p => `<li>${vectorIcons.chevronRight}<span>${p}</span></li>`).join("")}</ul>
+    </div>
+  `).join("");
+
+  // Rules
+  setText("rulesTitle", data.rules.title);
+  el("rulesList").innerHTML = data.rules.items.map(item => `
+    <li>
+      <div class="rule-check-icon">${vectorIcons.check}</div>
+      <span>${item.label ? `<strong>${item.label}</strong> ` : ""}${item.text}</span>
+    </li>
+  `).join("");
+
+  // Prizes (Replacing emojis with custom vector badges)
+  setText("prizesTitle", data.prizes.title);
+  setText("prizePool", data.prizes.pool);
+  setText("prizePoolText", data.prizes.poolText);
+  
+  const badgeMap = {
+    first: vectorIcons.firstPlaceBadge,
+    second: vectorIcons.secondPlaceBadge,
+    third: vectorIcons.thirdPlaceBadge
+  };
+
+  el("placements").innerHTML = data.prizes.placements.map((item, i) => `
+    <div class="place-card ${item.class}" style="--i:${i}">
+      <div class="place-badge-wrap">
+        ${badgeMap[item.type] || vectorIcons.award}
+      </div>
+      <h4>${item.title}</h4>
+      <div class="amt">${item.amount}</div>
+    </div>
+  `).join("");
+  
+  if (el("certificateText")) {
+    el("certificateText").innerHTML = `${vectorIcons.award} <span>${data.prizes.certificateText}</span>`;
+  }
+
+  // Registration
+  setText("registrationTitle", data.registration.title);
+  setText("registrationSubtitle", data.registration.subtitle);
+  setText("registrationInfoTitle", data.registration.infoTitle);
+  el("registrationCards").innerHTML = data.registration.cards.map(card => `
+    <div class="reg-card">
+      <div class="reg-card-icon">${vectorIcons[card.icon] || vectorIcons.wallet}</div>
+      <h4>${card.title}</h4>
+      <p>${card.text}</p>
+    </div>
+  `).join("");
+  setText("registrationNote", data.registration.note);
+  if (el("registrationFormLink")) el("registrationFormLink").href = "#registration";
+
+  setText("footerText", data.footer);
+
+  // Registration overlay
+  const registrationOverlay = el("registrationOverlay");
+  const closeRegistration = registrationOverlay.querySelector(".close-registration");
+  const registrationLinks = document.querySelectorAll('a[href="#registration"]');
+  let lastRegistrationTrigger = null;
+
+  const openRegistration = (event) => {
+    event.preventDefault();
+    lastRegistrationTrigger = event.currentTarget;
+    registrationOverlay.classList.add("is-open");
+    registrationOverlay.setAttribute("aria-hidden", "false");
+    document.body.classList.add("registration-open");
+    closeRegistration.focus();
+  };
+
+  const closeRegistrationOverlay = () => {
+    registrationOverlay.classList.remove("is-open");
+    registrationOverlay.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("registration-open");
+    if (lastRegistrationTrigger) lastRegistrationTrigger.focus();
+  };
+
+  registrationLinks.forEach(link => link.addEventListener("click", openRegistration));
+  closeRegistration.addEventListener("click", closeRegistrationOverlay);
+  registrationOverlay.addEventListener("click", event => {
+    if (event.target === registrationOverlay) closeRegistrationOverlay();
+  });
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape" && registrationOverlay.classList.contains("is-open")) {
+      closeRegistrationOverlay();
+    }
+  });
+
+  // Scroll reveal
+  const targets = document.querySelectorAll("[data-reveal]");
+  targets.forEach(target => {
+    target.classList.remove("in");
+    target.querySelectorAll(".in").forEach(child => child.classList.remove("in"));
+  });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in");
+        if (entry.target.hasAttribute("data-reveal-group")) {
+          Array.from(entry.target.children).forEach((child, i) => {
+            child.style.setProperty("--i", i);
+            child.classList.add("in");
+          });
+        }
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: "0px 0px -60px 0px" });
+  targets.forEach(t => io.observe(t));
+
+  document.querySelectorAll("[data-reveal-group] > *").forEach(c => {
+    c.style.opacity = 0;
+    c.style.transform = "translateY(18px)";
+    c.style.transition = "opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1)";
+  });
+})();
+
+const style = document.createElement("style");
+style.textContent = `[data-reveal-group].in > *{opacity:1!important;transform:translateY(0)!important;}`;
+document.head.appendChild(style);
+</script>
+
+
+
+
+</body></html>

@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ideathon 2026 Registration</title>
+
+  <!-- Standard icon library -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --primary: #111827;
+      --muted: #667085;
+      --border: #d0d5dd;
+      --bg: #f6f7f9;
+      --white: #ffffff;
+      --danger: #d92d20;
+      --success: #027a48;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 48px 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: var(--primary);
+      color: white;
+      border-radius: 14px 14px 0 0;
+      padding: 34px 36px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      line-height: 1.2;
+      letter-spacing: -.02em;
+    }
+
+    .intro {
+      margin: 0;
+      max-width: 620px;
+      color: #d1d5db;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .form-card {
+      background: var(--white);
+      padding: 36px;
+      border: 1px solid #e4e7ec;
+      border-top: 0;
+      border-radius: 0 0 14px 14px;
+      box-shadow: 0 8px 30px rgba(16, 24, 40, .06);
+    }
+
+    .section {
+      padding-bottom: 30px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #eaecf0;
+    }
+
+    .section:last-of-type {
+      border-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      margin: 0 0 5px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .section-description {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .grid .field {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .required {
+      color: var(--danger);
+      margin-left: 2px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+      padding: 0 13px;
+      font: inherit;
+      font-size: 14px;
+      color: #101828;
+      outline: none;
+      transition: border-color .15s, box-shadow .15s;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #667085;
+      box-shadow: 0 0 0 3px rgba(16, 24, 40, .08);
+    }
+
+    input.invalid,
+    select.invalid {
+      border-color: var(--danger);
+    }
+
+    .help {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .error {
+      display: none;
+      margin-top: 6px;
+      color: var(--danger);
+      font-size: 12px;
+    }
+
+    .field.has-error .error {
+      display: block;
+    }
+
+    .member-field.hidden {
+      display: none;
+    }
+
+    .upload {
+      border: 1.5px dashed #98a2b3;
+      border-radius: 10px;
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+    }
+
+    .upload:hover,
+    .upload.dragover {
+      border-color: #344054;
+      background: #f9fafb;
+    }
+
+    .upload-icon {
+      width: 42px;
+      height: 42px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      background: #f2f4f7;
+      display: grid;
+      place-items: center;
+      color: #344054;
+      font-size: 17px;
+    }
+
+    .upload-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .upload-subtitle {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    #paymentProof {
+      display: none;
+    }
+
+    .file-preview {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 14px;
+      border: 1px solid #eaecf0;
+      border-radius: 8px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .file-preview.show {
+      display: flex;
+    }
+
+    .file-info {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .file-info i {
+      color: #475467;
+    }
+
+    .file-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 13px;
+    }
+
+    .remove-file {
+      border: 0;
+      background: transparent;
+      color: #667085;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .submit-row {
+      margin-top: 28px;
+    }
+
+    .submit {
+      width: 100%;
+      height: 48px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--primary);
+      color: white;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+
+    .submit:hover { opacity: .9; }
+    .submit:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    .status {
+      display: none;
+      margin-top: 18px;
+      padding: 13px 15px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .status.show { display: block; }
+    .status.error-status {
+      color: #b42318;
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+    }
+
+    .success {
+      display: none;
+      text-align: center;
+      padding: 55px 20px;
+    }
+
+    .success.show { display: block; }
+
+    .success-icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: #ecfdf3;
+      color: var(--success);
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+    }
+
+    .success h2 {
+      margin: 0 0 9px;
+      font-size: 24px;
+    }
+
+    .success p {
+      margin: 0 auto;
+      max-width: 500px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .registration-id {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 18px;
+      border: 1px solid #d0d5dd;
+      border-radius: 8px;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      text-align: center;
+      color: #98a2b3;
+      font-size: 12px;
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 20px 12px; }
+      .header { padding: 28px 22px; }
+      .form-card { padding: 26px 20px; }
+      .grid { grid-template-columns: 1fr; gap: 0; }
+      h1 { font-size: 25px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="container">
+
+      <header class="header">
+        <div class="brand">
+          <!-- <span class="brand-mark"><i class="fa-solid fa-microchip"></i></span> -->
+          AICTE IDEA LAB
+        </div>
+
+        <h1>Ideathon 2026 Registration</h1>
+
+        <p class="intro">
+          Register your team for the National-Level AICTE IDEA LAB
+          Ideathon at New Horizon College of Engineering.
+        </p>
+      </header>
+
+      <section class="form-card">
+
+        <form id="registrationForm" novalidate>
+
+          <!-- TEAM LEADER -->
+          <div class="section">
+            <h2 class="section-title">Team Leader</h2>
+            <p class="section-description">
+              Enter the primary contact details for your team.
+            </p>
+
+            <div class="grid">
+
+              <div class="field" data-field="leaderName">
+                <label for="leaderName">
+                  Team Leader Full Name <span class="required">*</span>
+                </label>
+                <input id="leaderName" name="leaderName" type="text"
+                       autocomplete="name" required>
+                <div class="error">Please enter the team leader's full name.</div>
+              </div>
+
+              <div class="field" data-field="leaderEmail">
+                <label for="leaderEmail">
+                  Team Leader Email Address <span class="required">*</span>
+                </label>
+                <input id="leaderEmail" name="leaderEmail" type="email"
+                       autocomplete="email" required>
+                <div class="error">Please enter a valid email address.</div>
+              </div>
+
+              <div class="field" data-field="leaderPhone">
+                <label for="leaderPhone">
+                  Team Leader Phone Number <span class="required">*</span>
+                </label>
+                <input id="leaderPhone" name="leaderPhone" type="tel"
+                       inputmode="numeric" autocomplete="tel" required>
+                <div class="error">Please enter a valid phone number.</div>
+              </div>
+
+              <div class="field" data-field="college">
+                <label for="college">
+                  College Name <span class="required">*</span>
+                </label>
+                <input id="college" name="college" type="text" required>
+                <div class="error">Please enter your college name.</div>
+              </div>
+
+              <div class="field" data-field="degreeProgram">
+                <label for="degreeProgram">
+                  Degree Program <span class="required">*</span>
+                </label>
+                <select id="degreeProgram" name="degreeProgram" required>
+                  <option value="">Select degree program</option>
+                  <option value="B.E. / B.Tech">B.E. / B.Tech</option>
+                  <option value="M.E. / M.Tech">M.E. / M.Tech</option>
+                  <option value="BCA / MCA">BCA / MCA</option>
+                  <option value="Other">Other</option>
+                </select>
+                <div class="error">Please select a degree program.</div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- TEAM -->
+          <div class="section">
+            <h2 class="section-title">Team Details</h2>
+            <p class="section-description">
+              Provide your team information. The additional member fields
+              will appear according to the selected team size.
+            </p>
+
+            <div class="grid">
+
+              <div class="field" data-field="teamSize">
+                <label for="teamSize">
+                  Team Size <span class="required">*</span>
+                </label>
+
+                <select id="teamSize" name="teamSize" required>
+                  <option value="">Select team size</option>
+                  <option value="1">1 Member</option>
+                  <option value="2">2 Members</option>
+                  <option value="3">3 Members</option>
+                  <option value="4">4 Members</option>
+                  <option value="5">5 Members</option>
+                  <option value="6">6 Members</option>
+                </select>
+
+                <div class="error">Please select your team size.</div>
+              </div>
+
+              <div class="field" data-field="teamName">
+                <label for="teamName">
+                  Team Name <span class="required">*</span>
+                </label>
+                <input id="teamName" name="teamName" type="text" required>
+                <div class="error">Please enter your team name.</div>
+              </div>
+
+            </div>
+
+            <div id="memberFields">
+
+              <div class="field member-field hidden" data-member="2">
+                <label for="member2">Team Member 2 Full Name <span class="required">*</span></label>
+                <input id="member2" type="text">
+                <div class="error">Please enter Member 2's full name.</div>
+              </div>
+
+              <div class="field member-field hidden" data-member="3">
+                <label for="member3">Team Member 3 Full Name <span class="required">*</span></label>
+                <input id="member3" type="text">
+                <div class="error">Please enter Member 3's full name.</div>
+              </div>
+
+              <div class="field member-field hidden" data-member="4">
+                <label for="member4">Team Member 4 Full Name <span class="required">*</span></label>
+                <input id="member4" type="text">
+                <div class="error">Please enter Member 4's full name.</div>
+              </div>
+
+              <div class="field member-field hidden" data-member="5">
+                <label for="member5">Team Member 5 Full Name <span class="required">*</span></label>
+                <input id="member5" type="text">
+                <div class="error">Please enter Member 5's full name.</div>
+              </div>
+
+              <div class="field member-field hidden" data-member="6">
+                <label for="member6">Team Member 6 Full Name <span class="required">*</span></label>
+                <input id="member6" type="text">
+                <div class="error">Please enter Member 6's full name.</div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- TRACK -->
+          <div class="section">
+            <h2 class="section-title">Innovation Track</h2>
+            <p class="section-description">
+              Select the track your team is participating in.
+            </p>
+
+            <div class="field" data-field="innovationTrack">
+              <label for="innovationTrack">
+                Select Innovation Track <span class="required">*</span>
+              </label>
+
+              <select id="innovationTrack" name="innovationTrack" required>
+                <option value="">Select innovation track</option>
+                <option value="Track 1">Track 1</option>
+                <option value="Track 2">Track 2</option>
+                <option value="Track 3">Track 3</option>
+                <option value="Track 4">Track 4</option>
+              </select>
+
+              <div class="error">Please select an innovation track.</div>
+            </div>
+          </div>
+
+
+          <!-- PAYMENT -->
+          <div class="section">
+            <h2 class="section-title">Payment Proof</h2>
+            <p class="section-description">
+              Upload proof of the ₹600 registration fee payment.
+            </p>
+
+            <div class="field" data-field="paymentProof">
+
+              <label>
+                Upload Payment Proof <span class="required">*</span>
+              </label>
+
+              <div class="upload" id="uploadArea">
+                <div class="upload-icon">
+                  <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                </div>
+
+                <div class="upload-title">
+                  Click to upload or drag and drop
+                </div>
+
+                <div class="upload-subtitle">
+                  PDF, JPG or PNG · Maximum 10 MB
+                </div>
+
+                <input id="paymentProof"
+                       name="paymentProof"
+                       type="file"
+                       accept=".pdf,.jpg,.jpeg,.png">
+              </div>
+
+              <div class="file-preview" id="filePreview">
+                <div class="file-info">
+                  <i class="fa-regular fa-file"></i>
+                  <span class="file-name" id="fileName"></span>
+                </div>
+
+                <button type="button"
+                        class="remove-file"
+                        id="removeFile"
+                        aria-label="Remove file">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+
+              <div class="error" id="fileError">
+                Please upload your payment proof.
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="submit-row">
+            <button class="submit" id="submitButton" type="submit">
+              Submit Registration
+            </button>
+
+            <div class="status error-status" id="status"></div>
+          </div>
+
+        </form>
+
+
+        <!-- SUCCESS -->
+        <div class="success" id="successScreen">
+
+          <div class="success-icon">
+            <i class="fa-solid fa-check"></i>
+          </div>
+
+          <h2>Registration Complete</h2>
+
+          <p>
+            Your Ideathon 2026 registration has been submitted successfully.
+            Please keep your registration ID for future reference.
+          </p>
+
+          <div class="registration-id" id="registrationId">
+            IDEA26-00000
+          </div>
+
+        </div>
+
+      </section>
+
+      <div class="footer-note">
+        AICTE IDEA LAB · New Horizon College of Engineering
+      </div>
+
+    </div>
+  </main>
+
+
+  <script>
+    /************************************************
+     * CONFIGURATION
+     ************************************************/
+
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbyW0sPPLnb62TI-5L7LOWLD3bfcUnz3YyLQXP7Fqb50QB8xG75U18a33andXFnS7daLvg/exec";
+
+    const MAX_FILE_SIZE =
+      10 * 1024 * 1024;
+
+    const ALLOWED_TYPES = [
+      "application/pdf",
+      "image/jpeg",
+      "image/png"
+    ];
+
+
+    /************************************************
+     * ELEMENTS
+     ************************************************/
+
+    const form =
+      document.getElementById("registrationForm");
+
+    const teamSize =
+      document.getElementById("teamSize");
+
+    const uploadArea =
+      document.getElementById("uploadArea");
+
+    const fileInput =
+      document.getElementById("paymentProof");
+
+    const filePreview =
+      document.getElementById("filePreview");
+
+    const fileName =
+      document.getElementById("fileName");
+
+    const removeFile =
+      document.getElementById("removeFile");
+
+    const submitButton =
+      document.getElementById("submitButton");
+
+    const statusBox =
+      document.getElementById("status");
+
+
+    /************************************************
+     * TEAM MEMBER VISIBILITY
+     ************************************************/
+
+    teamSize.addEventListener("change", updateMembers);
+
+    function updateMembers() {
+
+      const size =
+        Number(teamSize.value || 0);
+
+      for (let i = 2; i <= 6; i++) {
+
+        const wrapper =
+          document.querySelector(
+            `[data-member="${i}"]`
+          );
+
+        const input =
+          document.getElementById(`member${i}`);
+
+        if (!wrapper || !input) continue;
+
+        const visible =
+          i <= size;
+
+        wrapper.classList.toggle(
+          "hidden",
+          !visible
+        );
+
+        input.required = visible;
+
+        if (!visible) {
+          input.value = "";
+          clearFieldError(wrapper);
+        }
+      }
+    }
+
+
+    /************************************************
+     * FILE UPLOAD
+     ************************************************/
+
+    uploadArea.addEventListener(
+      "click",
+      () => fileInput.click()
+    );
+
+    fileInput.addEventListener(
+      "change",
+      () => {
+
+        if (fileInput.files[0]) {
+          handleFile(fileInput.files[0]);
+        }
+      }
+    );
+
+
+    uploadArea.addEventListener(
+      "dragover",
+      event => {
+
+        event.preventDefault();
+
+        uploadArea.classList.add(
+          "dragover"
+        );
+      }
+    );
+
+
+    uploadArea.addEventListener(
+      "dragleave",
+      () => {
+
+        uploadArea.classList.remove(
+          "dragover"
+        );
+      }
+    );
+
+
+    uploadArea.addEventListener(
+      "drop",
+      event => {
+
+        event.preventDefault();
+
+        uploadArea.classList.remove(
+          "dragover"
+        );
+
+        const file =
+          event.dataTransfer.files[0];
+
+        if (!file) return;
+
+        const transfer =
+          new DataTransfer();
+
+        transfer.items.add(file);
+
+        fileInput.files =
+          transfer.files;
+
+        handleFile(file);
+      }
+    );
+
+
+    removeFile.addEventListener(
+      "click",
+      event => {
+
+        event.stopPropagation();
+
+        fileInput.value = "";
+
+        filePreview.classList.remove(
+          "show"
+        );
+      }
+    );
+
+
+    function handleFile(file) {
+
+      const validType =
+        ALLOWED_TYPES.includes(file.type);
+
+      const validSize =
+        file.size <= MAX_FILE_SIZE;
+
+      if (!validType) {
+
+        showStatus(
+          "Invalid file type. Please upload a PDF, JPG, or PNG.",
+          true
+        );
+
+        fileInput.value = "";
+
+        return;
+      }
+
+      if (!validSize) {
+
+        showStatus(
+          "File is too large. Maximum size is 10 MB.",
+          true
+        );
+
+        fileInput.value = "";
+
+        return;
+      }
+
+      fileName.textContent =
+        file.name;
+
+      filePreview.classList.add(
+        "show"
+      );
+
+      clearStatus();
+    }
+
+
+    /************************************************
+     * FORM SUBMISSION
+     ************************************************/
+
+    form.addEventListener(
+      "submit",
+      async event => {
+
+        event.preventDefault();
+
+        clearStatus();
+
+        if (!validateForm()) {
+          return;
+        }
+
+        submitButton.disabled = true;
+
+        submitButton.innerHTML =
+          '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+
+
+        try {
+
+          const file =
+            fileInput.files[0];
+
+          const base64 =
+            await fileToBase64(file);
+
+
+          const size =
+            Number(teamSize.value);
+
+          const members = [];
+
+          for (let i = 2; i <= size; i++) {
+
+            members.push(
+              document
+                .getElementById(`member${i}`)
+                .value
+                .trim()
+            );
+          }
+
+
+          const payload = {
+
+            teamLeader: {
+
+              fullName:
+                document
+                  .getElementById("leaderName")
+                  .value
+                  .trim(),
+
+              email:
+                document
+                  .getElementById("leaderEmail")
+                  .value
+                  .trim(),
+
+              phone:
+                document
+                  .getElementById("leaderPhone")
+                  .value
+                  .trim()
+            },
+
+            college:
+              document
+                .getElementById("college")
+                .value
+                .trim(),
+
+            degreeProgram:
+              document
+                .getElementById("degreeProgram")
+                .value,
+
+            teamSize: size,
+
+            teamName:
+              document
+                .getElementById("teamName")
+                .value
+                .trim(),
+
+            members,
+
+            innovationTrack:
+              document
+                .getElementById("innovationTrack")
+                .value,
+
+            paymentProof: {
+
+              name: file.name,
+
+              mimeType: file.type,
+
+              base64
+
+            }
+          };
+
+
+          const response =
+            await fetch(
+              API_URL,
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "text/plain;charset=utf-8"
+                },
+
+                body:
+                  JSON.stringify(payload)
+              }
+            );
+
+
+          const result =
+            await response.json();
+
+
+          if (!result.success) {
+
+            throw new Error(
+              result.message ||
+              result.error ||
+              "Registration failed."
+            );
+          }
+
+
+          showSuccess(
+            result.registrationId
+          );
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          showStatus(
+            "Unable to submit the registration. Please check your connection and try again.",
+            true
+          );
+
+          submitButton.disabled = false;
+
+          submitButton.textContent =
+            "Submit Registration";
+        }
+
+      }
+    );
+
+
+    /************************************************
+     * VALIDATION
+     ************************************************/
+
+    function validateForm() {
+
+      let valid = true;
+
+      const requiredInputs =
+        form.querySelectorAll(
+          "input[required], select[required]"
+        );
+
+
+      requiredInputs.forEach(input => {
+
+        const wrapper =
+          input.closest(".field");
+
+        if (
+          wrapper &&
+          wrapper.classList.contains("hidden")
+        ) {
+          return;
+        }
+
+
+        let fieldValid =
+          input.value.trim() !== "";
+
+
+        if (
+          input.type === "email" &&
+          fieldValid
+        ) {
+
+          fieldValid =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+              .test(input.value.trim());
+        }
+
+
+        if (
+          input.id === "leaderPhone" &&
+          fieldValid
+        ) {
+
+          const digits =
+            input.value.replace(/\D/g, "");
+
+          fieldValid =
+            digits.length >= 10 &&
+            digits.length <= 15;
+        }
+
+
+        setFieldError(
+          wrapper,
+          !fieldValid
+        );
+
+
+        if (!fieldValid) {
+          valid = false;
+        }
+      });
+
+
+      const size =
+        Number(teamSize.value);
+
+      const members = [];
+
+      if (size >= 2) {
+
+        for (
+          let i = 2;
+          i <= size;
+          i++
+        ) {
+
+          const input =
+            document.getElementById(
+              `member${i}`
+            );
+
+          if (input.value.trim()) {
+            members.push(
+              input.value.trim()
+            );
+          }
+        }
+      }
+
+
+      if (
+        size &&
+        members.length !== size - 1
+      ) {
+
+        valid = false;
+
+        showStatus(
+          "Please enter all required team member names.",
+          true
+        );
+      }
+
+
+      const file =
+        fileInput.files[0];
+
+      if (!file) {
+
+        valid = false;
+
+        document
+          .querySelector(
+            '[data-field="paymentProof"]'
+          )
+          .classList.add("has-error");
+      }
+
+
+      if (!valid && !statusBox.textContent) {
+
+        showStatus(
+          "Please complete all required fields.",
+          true
+        );
+      }
+
+
+      return valid;
+    }
+
+
+    /************************************************
+     * HELPERS
+     ************************************************/
+
+    function setFieldError(
+      wrapper,
+      hasError
+    ) {
+
+      if (!wrapper) return;
+
+      wrapper.classList.toggle(
+        "has-error",
+        hasError
+      );
+
+      const input =
+        wrapper.querySelector(
+          "input, select"
+        );
+
+      if (input) {
+
+        input.classList.toggle(
+          "invalid",
+          hasError
+        );
+      }
+    }
+
+
+    function clearFieldError(wrapper) {
+
+      setFieldError(
+        wrapper,
+        false
+      );
+    }
+
+
+    function fileToBase64(file) {
+
+      return new Promise(
+        (resolve, reject) => {
+
+          const reader =
+            new FileReader();
+
+          reader.onload = () => {
+
+            const result =
+              String(reader.result);
+
+            resolve(
+              result.split(",")[1]
+            );
+          };
+
+          reader.onerror =
+            reject;
+
+          reader.readAsDataURL(file);
+        }
+      );
+    }
+
+
+    function showStatus(
+      message,
+      isError = true
+    ) {
+
+      statusBox.textContent =
+        message;
+
+      statusBox.className =
+        "status show";
+
+      if (isError) {
+        statusBox.classList.add(
+          "error-status"
+        );
+      }
+    }
+
+
+    function clearStatus() {
+
+      statusBox.textContent = "";
+
+      statusBox.className =
+        "status";
+    }
+
+
+    function showSuccess(
+      registrationId
+    ) {
+
+      form.style.display = "none";
+
+      document
+        .getElementById("successScreen")
+        .classList.add("show");
+
+      document
+        .getElementById("registrationId")
+        .textContent =
+        registrationId;
+    }
+  </script>
+</body>
+</html>
