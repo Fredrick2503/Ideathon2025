@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ideathon 2026 — AICTE IDEA LAB @ NHCE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: { sans: ['Inter', 'sans-serif'] },
+      colors: {
+        navy: '#0F1B38',
+        'navy-2': '#16244A',
+        ink: '#141A24',
+        paper: '#F6F4EF',
+        orange: '#EA580C',
+        'orange-2': '#FF8A3D',
+        teal: '#12A9A0',
+        line: '#E4E0D6',
+        muted: '#5B6270'
+      }
+    }
+  }
+}
+</script>
+
+<!-- Only non-Tailwind primitives: reveal animation, marquee and podium visuals. -->
+<style>
+html{scroll-behavior:smooth}
+body{font-family:Inter,sans-serif;-webkit-font-smoothing:antialiased}
+[data-reveal]{opacity:0;transform:translateY(28px) scale(.985);transition:opacity 1.05s cubic-bezier(.16,1,.3,1),transform 1.05s cubic-bezier(.16,1,.3,1);will-change:opacity,transform}
+[data-reveal].in{opacity:1;transform:translateY(0)}
+[data-reveal-group]>*{transition-delay:calc(var(--i,0) * 130ms)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}[data-reveal]{opacity:1!important;transform:none!important;transition:none!important}}
+.logo-track{display:flex;width:max-content;align-items:center;animation:logo-scroll 24s linear infinite}
+.logo-marquee:hover .logo-track{animation-play-state:paused}
+@keyframes logo-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.logo-track{animation:none;transform:none}.logo-track .logo-item:nth-child(n+4){display:none}}
+.podium{display:flex;align-items:flex-end;justify-content:center;gap:28px;max-width:960px;margin:0 auto}
+.place-card{box-sizing:border-box;position:relative;width:100%;border-radius:24px;overflow:hidden;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease}
+.place-card:hover{transform:translateY(-6px)}
+.place-card.first{order:2;flex:1.15;min-height:330px;padding:44px 28px 36px;background:radial-gradient(130% 100% at 50% 0%,rgba(251,191,36,.22),rgba(217,119,6,.1) 60%,rgba(15,27,56,.95));border:2px solid rgba(251,191,36,.75);box-shadow:0 0 45px -8px rgba(245,158,11,.45),0 20px 40px -15px rgba(0,0,0,.6),inset 0 1px 1px rgba(255,255,255,.4);z-index:3;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.place-card.second{order:1;flex:1;min-height:265px;padding:34px 24px 28px;background:radial-gradient(120% 90% at 50% 0%,rgba(226,232,240,.18),rgba(148,163,184,.08) 55%,rgba(15,27,56,.95));border:1.5px solid rgba(203,213,225,.5);box-shadow:0 0 32px -8px rgba(148,163,184,.3),0 16px 36px -12px rgba(0,0,0,.5),inset 0 1px 1px rgba(255,255,255,.35);display:flex;flex-direction:column;justify-content:center;align-items:center}
+.place-card.third{order:3;flex:1;min-height:220px;padding:28px 20px 24px;background:radial-gradient(120% 90% at 50% 0%,rgba(217,119,6,.14),rgba(180,83,9,.05) 55%,rgba(15,27,56,.95));border:1px solid rgba(217,119,6,.38);box-shadow:0 0 24px -8px rgba(217,119,6,.22),0 12px 30px -10px rgba(0,0,0,.45);display:flex;flex-direction:column;justify-content:center;align-items:center}
+.place-card.first .place-badge-wrap{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#FDE68A,#F59E0B 45%,#B45309);color:#fff;box-shadow:0 8px 24px rgba(245,158,11,.5),inset 0 2px 4px rgba(255,255,255,.6);border:2px solid rgba(254,240,138,.6)}
+.place-card.second .place-badge-wrap{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#F8FAFC,#CBD5E1 45%,#64748B);color:#0F172A;box-shadow:0 6px 20px rgba(148,163,184,.4),inset 0 2px 3px rgba(255,255,255,.8);border:2px solid rgba(255,255,255,.7)}
+.place-card.third .place-badge-wrap{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#FDBA74,#D97706 50%,#78350F);color:#fff;box-shadow:0 4px 16px rgba(180,83,9,.3),inset 0 1px 2px rgba(255,255,255,.4);border:1.5px solid rgba(253,186,116,.45)}
+.place-card.first .amt{font-size:2.75rem;font-weight:800;background:linear-gradient(180deg,#fff 20%,#FDE047 70%,#F59E0B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 10px rgba(245,158,11,.45))}
+.place-card.second .amt{font-size:2.2rem;font-weight:800;background:linear-gradient(180deg,#fff 30%,#CBD5E1 75%,#94A3B8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 8px rgba(148,163,184,.35))}
+.place-card.third .amt{font-size:1.9rem;font-weight:700;color:#FED7AA}
+@media(max-width:720px){.podium{flex-direction:column;align-items:stretch;gap:20px}.place-card.first,.place-card.second,.place-card.third{order:unset;min-height:auto;flex:auto}}
+</style>
+</head>
+
+<body class="m-0 bg-paper text-ink">
+
+<header id="topbar" class="sticky top-0 z-50 border-b border-line bg-paper/95 backdrop-blur-[10px]">
+  <div class="mx-auto flex min-h-[72px] max-w-[1120px] items-center justify-between gap-4 px-6">
+    <div class="flex items-center">
+      <img src="nhce.png" alt="New Horizon College of Engineering" class="h-[72px] w-[250px] object-contain">
+    </div>
+    <nav class="flex gap-[22px] max-[820px]:hidden">
+      <a href="#about" class="text-[.88rem] font-medium text-muted transition-colors hover:text-navy">About</a>
+      <a href="#eligibility" class="text-[.88rem] font-medium text-muted transition-colors hover:text-navy">Eligibility</a>
+      <a href="#tracks" class="text-[.88rem] font-medium text-muted transition-colors hover:text-navy">Tracks</a>
+      <a href="#prizes" class="text-[.88rem] font-medium text-muted transition-colors hover:text-navy">Prizes</a>
+      <a href="#registration" class="text-[.88rem] font-medium text-muted transition-colors hover:text-navy">Register</a>
+    </nav>
+    <div class="flex items-center gap-[14px]" aria-label="AICTE and AICTE IDEA Lab">
+      <img src="aicte.png" alt="AICTE" class="h-[42px] w-[54px] object-contain">
+      <img src="idealab.png" alt="AICTE IDEA Lab" class="h-[42px] w-[62px] object-contain">
+    </div>
+  </div>
+</header>
+
+<div id="registrationOverlay" role="dialog" aria-modal="true" aria-label="Ideathon registration form" aria-hidden="true"
+     class="fixed inset-0 z-[100] flex invisible items-center justify-center bg-navy/60 p-6 opacity-0 backdrop-blur-[8px] transition-opacity duration-[450ms] max-[600px]:p-[10px]">
+  <div class="relative h-[min(92vh,900px)] w-[min(960px,100%)] overflow-hidden rounded-[18px] border border-white/70 bg-white shadow-[0_28px_80px_rgba(15,27,56,.35)] max-[600px]:h-[94vh] max-[600px]:rounded-[14px]">
+    <button type="button" class="close-registration absolute right-[14px] top-[14px] z-10 flex h-[38px] w-[38px] items-center justify-center rounded-full border-0 bg-navy/90 text-[1.5rem] leading-none text-white shadow-[0_6px_18px_rgba(15,27,56,.22)] hover:bg-orange" aria-label="Close registration form">&times;</button>
+    <iframe src="form.html" title="Ideathon registration form" class="block h-full w-full border-0 bg-paper"></iframe>
+  </div>
+</div>
+
+<main>
+  <section id="hero" class="relative overflow-hidden bg-[linear-gradient(rgba(15,48,112,.78),rgba(15,27,56,.88)),url('bg.png')] bg-cover bg-center px-6 pb-24 pt-[120px] text-white">
+    <div class="relative z-[2] mx-auto max-w-[900px] text-center">
+      <div class="mb-[26px] inline-flex items-center gap-[10px] rounded-full border border-white/15 bg-white/[.08] px-[14px] py-1.5 text-[.82rem] font-medium text-white/85">
+        <span class="h-[7px] w-[7px] rounded-full bg-orange-2 shadow-[0_0_8px_#EA580C]"></span>
+        <span id="heroKicker">National-Level Challenge</span>
+      </div>
+      <h1 id="heroTitle" class="m-0 mb-[18px] text-[clamp(2.6rem,6vw,4.4rem)] font-bold leading-[1.04] text-white"></h1>
+      <p id="heroTagline" class="mx-auto mb-10 max-w-[640px] text-[clamp(1.05rem,1.6vw,1.3rem)] font-normal leading-[1.5] text-white/85"></p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="#registration" class="inline-flex">
+          <button id="register-button" class="inline-flex cursor-pointer items-center gap-2.5 rounded-full border-0 bg-orange px-[34px] py-4 text-[1.02rem] font-semibold text-white shadow-[0_12px_30px_-10px_rgba(234,88,12,.6)] transition duration-200 hover:-translate-y-0.5 hover:bg-orange-2">
+            <span id="register-button-text"></span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </button>
+        </a>
+        <a id="rulebookLink" download hidden href="Ideathon-2025-Rulebook.pdf" class="inline-flex">
+          <button id="veiw-button" class="inline-flex cursor-pointer items-center gap-2.5 rounded-full border border-white/25 bg-white/[.06] px-[34px] py-4 text-[1.02rem] font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-white/[.14]">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5Z"></path><path d="M6 6h10"></path><path d="M6 10h10"></path></svg>
+            <span id="view-button-text"></span>
+          </button>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="orgby" class="overflow-hidden border-y border-line bg-white">
+    <div class="mx-auto flex max-w-[1120px] items-center justify-center gap-8 px-6 py-[22px] max-[600px]:flex-col max-[600px]:gap-[14px] max-[600px]:px-5">
+      <span class="shrink-0 text-left text-[.75rem] font-bold uppercase tracking-[.12em] text-muted max-[600px]:text-center">Organized by</span>
+      <div class="logo-marquee relative min-w-0 max-w-full flex-[0_0_738px] overflow-hidden py-1 max-[600px]:w-full max-[600px]:flex-auto" aria-label="Organized by NHCE, AICTE, and AICTE IDEA Lab">
+        <div class="pointer-events-none absolute inset-y-0 left-0 z-[2] w-[90px] bg-gradient-to-r from-white to-transparent max-[600px]:w-[42px]"></div>
+        <div class="pointer-events-none absolute inset-y-0 right-0 z-[2] w-[90px] bg-gradient-to-l from-white to-transparent max-[600px]:w-[42px]"></div>
+        <div class="logo-track">
+          <div class="logo-item mx-[18px] flex h-[82px] w-[210px] shrink-0 items-center justify-center max-[600px]:mx-[10px] max-[600px]:h-16 max-[600px]:w-[150px]"><img src="nhce.png" alt="New Horizon College of Engineering" class="h-full w-full object-contain"></div>
+          <div class="logo-item mx-[18px] flex h-[82px] w-[210px] shrink-0 items-center justify-center max-[600px]:mx-[10px] max-[600px]:h-16 max-[600px]:w-[150px]"><img src="aicte.png" alt="AICTE" class="h-full w-full object-contain"></div>
+          <div class="logo-item mx-[18px] flex h-[82px] w-[210px] shrink-0 items-center justify-center max-[600px]:mx-[10px] max-[600px]:h-16 max-[600px]:w-[150px]"><img src="idealab.png" alt="AICTE IDEA Lab" class="h-full w-full object-contain"></div>
+          <div class="logo-item mx-[18px] flex h-[82px] w-[210px] shrink-0 items-center justify-center max-[600px]:mx-[10px] max-[600px]:h-16 max-[600px]:w-[150px]" aria-hidden="true"><img src="nhce.png" alt="" class="h-full w-full object-contain"></div>
+          <div class="logo-item mx-[18px] flex h-[82px] w-[210px] shrink-0 items-center justify-center max-[600px]:mx-[10px] max-[600px]:h-16 max-[600px]:w-[150px]" aria-hidden="true"><img src="aicte.png" alt="" class="h-full w-full object-contain"></div>
+          <div class="logo-item mx-[18px] flex h-[82px] w-[210px] shrink-0 items-center justify-center max-[600px]:mx-[10px] max-[600px]:h-16 max-[600px]:w-[150px]" aria-hidden="true"><img src="idealab.png" alt="" class="h-full w-full object-contain"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="bg-white py-24">
+    <div class="mx-auto max-w-[1120px] px-6">
+      <div class="section-head mb-14 max-w-[600px]" data-reveal>
+        <div class="mb-2.5 text-[.8rem] font-bold uppercase tracking-[.06em] text-orange">About the event</div>
+        <h2 id="aboutTitle" class="m-0 mb-3.5 text-[clamp(1.9rem,3vw,2.6rem)] font-semibold leading-[1.1]"></h2>
+      </div>
+      <div class="grid grid-cols-[1.1fr_.9fr] items-start gap-16 max-[860px]:grid-cols-1 max-[860px]:gap-10">
+        <div id="aboutParagraphs" class="text-[1.08rem] leading-[1.7] text-[#333]" data-reveal></div>
+        <div id="stats" class="flex flex-col overflow-hidden rounded-[18px] bg-navy shadow-[0_20px_40px_-15px_rgba(15,27,56,.3)]" data-reveal></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="eligibility" class="bg-paper py-24">
+    <div class="mx-auto max-w-[1120px] px-6">
+      <div class="section-head mb-14 max-w-[600px]" data-reveal>
+        <div class="mb-2.5 text-[.8rem] font-bold uppercase tracking-[.06em] text-orange">Who can join</div>
+        <h2 id="eligibilityTitle" class="m-0 mb-3.5 text-[clamp(1.9rem,3vw,2.6rem)] font-semibold leading-[1.1]"></h2>
+        <p id="eligibilitySubtitle" class="m-0 text-[1.08rem] leading-[1.6] text-muted"></p>
+      </div>
+      <div id="eligibilityItems" class="grid grid-cols-4 gap-px overflow-hidden rounded-2xl border border-line bg-line max-[860px]:grid-cols-2 max-[520px]:grid-cols-1" data-reveal data-reveal-group></div>
+      <div class="mt-10 rounded-2xl bg-navy px-10 py-9 text-white" data-reveal>
+        <div class="mb-4 flex items-center gap-3">
+          <svg viewBox="0 0 24 24" class="h-6 w-6 text-orange-2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <h3 id="eligibilityNoteTitle" class="m-0 text-[1.3rem] font-semibold"></h3>
+        </div>
+        <div id="eligibilityNotes"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tracks" class="bg-white py-24">
+    <div class="mx-auto max-w-[1120px] px-6">
+      <div class="section-head mb-14 max-w-[600px]" data-reveal>
+        <div class="mb-2.5 text-[.8rem] font-bold uppercase tracking-[.06em] text-orange">Where to focus</div>
+        <h2 class="m-0 mb-3.5 text-[clamp(1.9rem,3vw,2.6rem)] font-semibold leading-[1.1]">Tracks &amp; problem statements</h2>
+        <p class="m-0 text-[1.08rem] leading-[1.6] text-muted">Four national tracks, each with real problem statements designed to challenge innovators.</p>
+      </div>
+      <div id="tracksGrid" class="grid grid-cols-2 gap-6 max-[820px]:grid-cols-1" data-reveal data-reveal-group></div>
+    </div>
+  </section>
+
+  <section id="rules" class="bg-paper py-24">
+    <div class="mx-auto max-w-[760px] px-6">
+      <div class="section-head mb-14 max-w-[600px]" data-reveal>
+        <div class="mb-2.5 text-[.8rem] font-bold uppercase tracking-[.06em] text-orange">Before you register</div>
+        <h2 id="rulesTitle" class="m-0 mb-3.5 text-[clamp(1.9rem,3vw,2.6rem)] font-semibold leading-[1.1]"></h2>
+      </div>
+      <div class="rounded-[18px] border border-line bg-white px-11 py-11 max-[600px]:px-6" data-reveal>
+        <ul id="rulesList" class="m-0 flex list-none flex-col p-0"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="prizes" class="bg-gradient-to-b from-navy to-navy-2 py-24 text-white">
+    <div class="mx-auto max-w-[1120px] px-6">
+      <div class="section-head mb-14 max-w-[600px]" data-reveal>
+        <div class="mb-2.5 text-[.8rem] font-bold uppercase tracking-[.06em] text-orange-2">Recognition</div>
+        <h2 id="prizesTitle" class="m-0 mb-3.5 text-[clamp(1.9rem,3vw,2.6rem)] font-semibold leading-[1.1] text-white"></h2>
+      </div>
+      <div class="mb-12 text-center">
+        <div id="prizePool" class="text-[clamp(3rem,7vw,4.6rem)] font-bold text-orange-2"></div>
+        <div id="prizePoolText" class="mt-1.5 text-[1.05rem] text-white/65"></div>
+      </div>
+      <div id="placements" class="podium" data-reveal data-reveal-group></div>
+      <div id="certificateText" class="mt-9 flex items-center justify-center gap-3 rounded-[14px] border border-teal/35 bg-teal/[.12] px-7 py-5 text-center text-base font-medium text-[#d6f5f2]"></div>
+    </div>
+  </section>
+
+  <section id="registration" class="bg-white py-24">
+    <div class="mx-auto max-w-[1120px] px-6">
+      <div class="rounded-[20px] border border-line bg-paper p-12 max-[520px]:px-[22px] max-[520px]:py-7">
+        <div class="mb-9 grid grid-cols-[1fr_auto] items-center gap-10 max-[820px]:grid-cols-1 max-[820px]:gap-6">
+          <div class="section-head m-0 max-w-[600px]">
+            <div class="mb-2.5 text-[.8rem] font-bold uppercase tracking-[.06em] text-orange">Join the challenge</div>
+            <h2 id="registrationTitle" class="m-0 mb-2.5 text-[clamp(1.9rem,3vw,2.6rem)] font-semibold leading-[1.1]"></h2>
+            <p id="registrationSubtitle" class="m-0 text-[1.08rem] leading-[1.6] text-muted"></p>
+          </div>
+          <div class="flex justify-end max-[820px]:justify-start">
+            <a id="registrationFormLink" href="#registration" class="inline-flex">
+              <button class="inline-flex cursor-pointer items-center gap-2.5 rounded-full border-0 bg-orange px-[34px] py-4 text-[1.02rem] font-semibold text-white shadow-[0_12px_30px_-10px_rgba(234,88,12,.6)] transition duration-200 hover:-translate-y-0.5 hover:bg-orange-2">
+                <span>Register Now</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </a>
+          </div>
+        </div>
+        <h3 id="registrationInfoTitle" class="mb-6 text-left text-[1.4rem] font-semibold text-navy"></h3>
+        <div id="registrationCards" class="grid grid-cols-3 gap-5 max-[820px]:grid-cols-1"></div>
+        <p id="registrationNote" class="mt-7 text-center text-[.95rem] leading-[1.6] text-muted"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-white/[.08] bg-navy px-6 py-9 text-center text-[.88rem] text-white/60">
+  <div id="footerText"></div>
+</footer>
+
+<script id="page-data" type="application/json">
+{
+  "hero": {
+    "title": "Ideathon 2026",
+    "kicker": "National-Level Challenge",
+    "tagline": "Collaborate, innovate, and launch solutions to real problems — with mentors, judges, and innovators from across India.",
+    "registerText": "Register Now",
+    "rulebookText": "View Rulebook",
+    "rulebookUrl": "Ideathon-2025-Rulebook.pdf"
+  },
+  "about": {
+    "title": "A National platform for real ideas",
+    "paragraphs": [
+      "Welcome to the National-Level AICTE IDEA LAB Ideathon at New Horizon College of Engineering! This dynamic platform brings together innovative minds from across the country to address real-world challenges.",
+      "It's your opportunity to collaborate with students nationwide, transform ideas into impactful solutions, and showcase your innovation to industry experts, mentors, and academicians.",
+      "The Ideathon goes beyond competition; it is a national platform for aspiring innovators to connect, create, and turn promising ideas into solutions with meaningful impact."
+    ],
+    "highlight": "Embark on a transformative national journey to build, learn, and launch the next big idea and be part of shaping the future through innovation and collaboration.",
+    "stats": [
+      { "value": "₹80,000", "label": "Total prize pool", "icon": "trophy" },
+      { "value": "4", "label": "Innovation tracks", "icon": "layers" },
+      { "value": "₹600", "label": "Registration fee", "icon": "tag" }
+    ]
+  },
+  "eligibility": {
+    "title": "Eligibility criteria",
+    "subtitle": "Open to all UG/PG students in tech-related streams",
+    "items": [
+      { "title": "B.E. / B.Tech", "description": "All engineering streams", "icon": "cpu" },
+      { "title": "M.E. / M.Tech", "description": "All engineering streams", "icon": "compass" },
+      { "title": "BCA / MCA", "description": "Computer applications", "icon": "code" },
+      { "title": "BSc / MSc", "description": "CS, IT, or related fields", "icon": "database" }
+    ],
+    "noteTitle": "Important notes",
+    "notes": [
+      "All participants must carry a valid college ID at the venue.",
+      "Interdisciplinary teams are highly encouraged but cross-college teams are not allowed."
+    ]
+  },
+  "tracks": [
+    {
+      "title": "Disaster Management",
+      "icon": "shield-alert",
+      "problems": [
+        "PS-1A: AI-driven fake news filter",
+        "PS-1B: Dynamic evacuation routing system",
+        "PS-1C: Digital system for missing persons",
+        "PS-1D: Crowd stampede prevention",
+        "PS-1E: Blockchain for aid transparency"
+      ]
+    },
+    {
+      "title": "Fintech (Financial Technology)",
+      "icon": "credit-card",
+      "problems": [
+        "PS-2A: Inclusive digital credit assessment",
+        "PS-2B: AI-enabled fraud detection in UPI",
+        "PS-2C: Voice-first banking for rural users",
+        "PS-2D: Gamified financial literacy platform for Gen Z",
+        "PS-2E: Cross-border tuition payment system"
+      ]
+    },
+    {
+      "title": "Sustainable Energy Management",
+      "icon": "zap",
+      "problems": [
+        "PS-3A: Smart campus energy management",
+        "PS-3B: Affordable solar energy storage",
+        "PS-3C: Community waste-to-energy solution",
+        "PS-3D: Green finance tracking application",
+        "PS-3E: Vertical axis wind turbines for cities"
+      ]
+    },
+    {
+      "title": "Smart Vehicles & Transportation",
+      "icon": "navigation",
+      "problems": [
+        "PS-5A: AI for traffic flow optimization",
+        "PS-5B: Smart parking solution",
+        "PS-5C: Intelligent EV charging network",
+        "PS-5D: Affordable EV retrofit kits",
+        "PS-5E: Smart driver assistance for accident prevention"
+      ]
+    }
+  ],
+  "rules": {
+    "title": "Rules & guidelines",
+    "items": [
+      { "label": "Team size:", "text": "Teams can consist of 1 to 6 members. You can register as a solo innovator or as a team." },
+      { "label": "Interdisciplinary teams:", "text": "We highly encourage forming teams with students from different branches of study." },
+      { "label": "Cross-college teams:", "text": "Teams must be formed within the same college; inter-college teams are not allowed." },
+      { "label": "Originality:", "text": "Your idea must be your own work, developed for this event." },
+      { "label": "Respect:", "text": "Treat all participants, mentors, judges, and organizers with respect." },
+      { "label": "Results:", "text": "Judges' decision is final." }
+    ]
+  },
+  "prizes": {
+    "title": "Prizes & recognition",
+    "pool": "₹80,000",
+    "poolText": "Total prize pool across 4 tracks",
+    "placements": [
+      { "type": "first", "title": "First Place", "amount": "₹10,000", "class": "first" },
+      { "type": "second", "title": "Second Place", "amount": "₹6,000", "class": "second" },
+      { "type": "third", "title": "Third Place", "amount": "₹4,000", "class": "third" }
+    ],
+    "certificateText": "All valid teams receive verified participation certificates"
+  },
+  "registration": {
+    "title": "Register now and join the challenge",
+    "subtitle": "Take the first step — secure your spot today.",
+    "infoTitle": "Registration information",
+    "cards": [
+      { "title": "Registration fee", "text": "A non-refundable registration fee of ₹600 per team is required to confirm your spot.", "icon": "wallet" },
+      { "title": "Registration deadline", "text": "The deadline for registration is October 25, 2026. All teams must register online before this date.", "icon": "calendar" },
+      { "title": "Required documents", "text": "All participants must carry their valid college ID card for verification at the venue on the day of the event.", "icon": "id-card" }
+    ],
+    "note": "Please save your proof of payment and upload a valid copy during form submission. Payments will be verified at the time of the competition.",
+    "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLSer3SiXDCv8ejOk-f_1FMDRg7PydpzC9QrV0lPCeA49qhDp/viewform"
+  },
+  "footer": "Ideathon 2026 · AICTE IDEA LAB @ New Horizon College of Engineering"
+}
+</script>
+
+<script>
+(() => {
+  'use strict';
+
+  const data = JSON.parse(document.getElementById('page-data').textContent);
+  const $ = id => document.getElementById(id);
+  const setText = (id, value) => { const node = $(id); if (node) node.textContent = value ?? ''; };
+  const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+
+  const icons = {
+    trophy: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7.5A1.5 1.5 0 0 0 6 19.5V21"></path><path d="M14 14.66V17c0 .55.45 1 1 1h1.5a1.5 1.5 0 0 1 1.5 1.5V21"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>',
+    layers: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>',
+    tag: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48 2.48 3.42 0l6.58-6.58c.94-.94 0-2.48 0-3.42L12 2Z"></path><path d="M7 7h.01"></path></svg>',
+    cpu: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>',
+    compass: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>',
+    code: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>',
+    database: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>',
+    'shield-alert': '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>',
+    'credit-card': '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>',
+    zap: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>',
+    navigation: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>',
+    wallet: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"></path><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"></path><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"></path></svg>',
+    calendar: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>',
+    'id-card': '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="9" cy="10" r="2"></circle><path d="M15 8h2"></path><path d="M15 12h2"></path><path d="M7 16h10"></path></svg>',
+    award: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>',
+    first: '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H7.5A1.5 1.5 0 0 0 6 19.5V21"></path><path d="M14 14.66V17c0 .55.45 1 1 1h1.5a1.5 1.5 0 0 1 1.5 1.5V21"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>',
+    second: '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>',
+    third: '<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>',
+    check: '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>',
+    chevronRight: '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>'
+  };
+
+  const statIcon = s => icons[s.icon] || icons.trophy;
+  const itemIcon = s => icons[s.icon] || icons.cpu;
+
+  // Hero
+  setText('heroKicker', data.hero.kicker);
+  setText('heroTitle', data.hero.title);
+  setText('heroTagline', data.hero.tagline);
+  setText('register-button-text', data.hero.registerText);
+  setText('view-button-text', data.hero.rulebookText);
+  $('rulebookLink').href = data.hero.rulebookUrl;
+
+  // About
+  setText('aboutTitle', data.about.title);
+  $('aboutParagraphs').innerHTML =
+    data.about.paragraphs.map(t => `<p class="mb-5">${escapeHTML(t)}</p>`).join('') +
+    `<p class="mt-7 border-l-[3px] border-orange pl-5 font-sans text-[1.15rem] italic leading-[1.5] text-navy">${escapeHTML(data.about.highlight)}</p>`;
+  $('stats').innerHTML = data.about.stats.map(s => `
+    <div class="flex items-center gap-5 border-b border-white/[.08] px-8 py-7 last:border-b-0">
+      <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/[.07] text-orange-2">${statIcon(s)}</div>
+      <div class="flex-1">
+        <div class="text-[2.4rem] font-bold leading-none text-white">${escapeHTML(s.value)}</div>
+        <div class="mt-1.5 text-[.9rem] text-white/65">${escapeHTML(s.label)}</div>
+      </div>
+    </div>`).join('');
+
+  // Eligibility
+  setText('eligibilityTitle', data.eligibility.title);
+  setText('eligibilitySubtitle', data.eligibility.subtitle);
+  $('eligibilityItems').innerHTML = data.eligibility.items.map((item, i) => `
+    <div class="elig-card bg-white p-8 px-6 transition-colors hover:bg-[#fff8f2]" style="--i:${i}">
+      <div class="mb-4 flex h-[42px] w-[42px] items-center justify-center rounded-[10px] bg-[#FFF0E6] text-orange">${itemIcon(item)}</div>
+      <h3 class="m-0 mb-2 text-[1.1rem] font-bold text-ink">${escapeHTML(item.title)}</h3>
+      <p class="m-0 text-[.92rem] leading-[1.5] text-muted">${escapeHTML(item.description)}</p>
+    </div>`).join('');
+  setText('eligibilityNoteTitle', data.eligibility.noteTitle);
+  $('eligibilityNotes').innerHTML = data.eligibility.notes.map(n => `
+    <p class="mb-2.5 flex items-start gap-2.5 text-[.98rem] leading-[1.6] text-white/[.78] last:mb-0">
+      <span class="mt-1 shrink-0 text-teal">${icons.chevronRight}</span><span>${escapeHTML(n)}</span>
+    </p>`).join('');
+
+  // Tracks
+  $('tracksGrid').innerHTML = data.tracks.map((track, i) => `
+    <div class="track-card rounded-[18px] border border-line bg-paper p-8 transition hover:-translate-y-[3px] hover:border-orange hover:shadow-[0_18px_40px_-22px_rgba(20,26,36,.25)]" style="--i:${i}">
+      <div class="mb-[18px] flex items-center gap-3.5">
+        <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#FFF0E6] text-orange">${itemIcon(track)}</div>
+        <h3 class="m-0 text-[1.3rem] font-semibold text-navy">${escapeHTML(track.title)}</h3>
+      </div>
+      <ul class="m-0 flex list-none flex-col gap-3 p-0">
+        ${track.problems.map(p => `<li class="flex gap-3 text-[.95rem] leading-[1.5] text-[#3a3f47]"><span class="mt-[3px] shrink-0 text-teal">${icons.chevronRight}</span><span>${escapeHTML(p)}</span></li>`).join('')}
+      </ul>
+    </div>`).join('');
+
+  // Rules
+  setText('rulesTitle', data.rules.title);
+  $('rulesList').innerHTML = data.rules.items.map(item => `
+    <li class="flex items-start gap-4 border-b border-line py-[18px] text-[1.02rem] leading-[1.5] text-[#2c2f36] last:border-b-0">
+      <div class="mt-0.5 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-[#FFF0E6] text-orange">${icons.check}</div>
+      <span>${item.label ? `<strong class="text-navy">${escapeHTML(item.label)}</strong> ` : ''}${escapeHTML(item.text)}</span>
+    </li>`).join('');
+
+  // Prizes
+  setText('prizesTitle', data.prizes.title);
+  setText('prizePool', data.prizes.pool);
+  setText('prizePoolText', data.prizes.poolText);
+  $('placements').innerHTML = data.prizes.placements.map(item => `
+    <div class="place-card ${escapeHTML(item.class)} bg-white/[.05] text-center text-white">
+      <div class="place-badge-wrap mb-4 flex items-center justify-center">${icons[item.type] || icons.award}</div>
+      <div class="mb-3 inline-block rounded-full border border-white/20 px-3 py-1 text-[.72rem] font-bold uppercase tracking-[.08em] text-white/80">${escapeHTML(item.title)}</div>
+      <h4 class="m-0 mb-2 text-[1.1rem] font-semibold text-white/90">${escapeHTML(item.title)}</h4>
+      <div class="amt">${escapeHTML(item.amount)}</div>
+    </div>`).join('');
+  $('certificateText').innerHTML = `${icons.award}<span>${escapeHTML(data.prizes.certificateText)}</span>`;
+
+  // Registration
+  setText('registrationTitle', data.registration.title);
+  setText('registrationSubtitle', data.registration.subtitle);
+  setText('registrationInfoTitle', data.registration.infoTitle);
+  $('registrationCards').innerHTML = data.registration.cards.map(card => `
+    <div class="rounded-[14px] border border-line bg-white p-6">
+      <div class="mb-3.5 flex h-10 w-10 items-center justify-center rounded-[10px] bg-[#FFF0E6] text-orange">${icons[card.icon] || icons.wallet}</div>
+      <h4 class="m-0 mb-2 text-[1.02rem] font-bold text-ink">${escapeHTML(card.title)}</h4>
+      <p class="m-0 text-[.92rem] leading-[1.5] text-muted">${escapeHTML(card.text)}</p>
+    </div>`).join('');
+  setText('registrationNote', data.registration.note);
+  setText('footerText', data.footer);
+
+  // Registration modal
+  const overlay = $('registrationOverlay');
+  const dialog = overlay.firstElementChild;
+  const close = overlay.querySelector('.close-registration');
+  let lastTrigger = null;
+
+  const openRegistration = event => {
+    event.preventDefault();
+    lastTrigger = event.currentTarget;
+    overlay.classList.remove('invisible', 'opacity-0');
+    overlay.classList.add('opacity-100');
+    document.body.classList.add('overflow-hidden');
+    close.focus();
+  };
+
+  const closeRegistration = () => {
+    overlay.classList.add('invisible', 'opacity-0');
+    overlay.classList.remove('opacity-100');
+    document.body.classList.remove('overflow-hidden');
+    lastTrigger?.focus();
+  };
+
+  document.querySelectorAll('a[href="#registration"]').forEach(link => link.addEventListener('click', openRegistration));
+  close.addEventListener('click', closeRegistration);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeRegistration(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !overlay.classList.contains('invisible')) closeRegistration(); });
+
+  // Reveal
+  const targets = document.querySelectorAll('[data-reveal]');
+  const reveal = node => {
+    node.classList.add('in');
+    if (node.hasAttribute('data-reveal-group')) {
+      [...node.children].forEach((child, i) => {
+        child.style.setProperty('--i', i);
+        child.classList.add('in');
+      });
+    }
+  };
+
+  document.querySelectorAll('[data-reveal-group] > *').forEach(child => {
+    child.style.opacity = '0';
+    child.style.transform = 'translateY(18px)';
+    child.style.transition = 'opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1)';
+  });
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { reveal(entry.target); io.unobserve(entry.target); }
+      });
+    }, {threshold:.15,rootMargin:'0px 0px -60px 0px'});
+    targets.forEach(t => io.observe(t));
+  } else {
+    targets.forEach(reveal);
+  }
+})();
+</script>
+</body>
+</html>
