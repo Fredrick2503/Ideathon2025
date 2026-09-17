@@ -99,11 +99,13 @@ img{max-width:100%;display:block;}
 #registrationCountdown{margin:-14px auto 34px;}
 #registrationCountdown .countdown-label{font-size:clamp(1rem,1.8vw,1.25rem);font-weight:800;letter-spacing:.12em;color:#fff;text-transform:uppercase;}
 #registrationCountdown .countdown-date{font-size:.82rem;color:rgba(255,255,255,.72);margin-top:5px;}
-#registrationCountdown .countdown-clock{display:flex;justify-content:center;gap:10px;margin-top:14px;}
-#registrationCountdown .countdown-unit{min-width:68px;padding:10px 8px;border:1px solid rgba(255,255,255,.22);border-radius:10px;background:rgba(255,255,255,.1);}
+#registrationCountdown .countdown-clock{display:flex;justify-content:center;align-items:flex-end;gap:0;margin-top:14px;flex-wrap:nowrap;}
+#registrationCountdown .countdown-unit{position:relative;min-width:72px;padding:0;border:none;background:none;display:flex;flex-direction:column;align-items:center;}
+#registrationCountdown .countdown-unit:not(:last-child){padding-right:18px;}
+#registrationCountdown .countdown-unit:not(:last-child)::after{content:":";position:absolute;right:3px;top:28%;transform:translateY(-50%);font-size:clamp(1.35rem,3vw,2rem);font-weight:800;line-height:1;color:#fff;}
 #registrationCountdown .countdown-value{display:block;font-size:clamp(1.35rem,3vw,2rem);font-weight:800;line-height:1;color:#fff;}
 #registrationCountdown .countdown-name{display:block;margin-top:5px;font-size:.62rem;color:rgba(255,255,255,.68);letter-spacing:.08em;text-transform:uppercase;}
-@media (max-width:480px){#registrationCountdown .countdown-clock{gap:6px;}#registrationCountdown .countdown-unit{min-width:58px;padding:9px 5px;}}
+@media (max-width:480px){#registrationCountdown .countdown-unit{min-width:58px;}#registrationCountdown .countdown-unit:not(:last-child){padding-right:12px;}}
 #hero .actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
 @media (max-width:600px){#hero{min-height:calc(100svh - 60px);padding:44px 18px 52px;}#hero .inner{transform:translateY(-10px);}#hero .kicker{margin-bottom:18px;}#hero .sub{margin-bottom:28px;font-size:1rem;}#registrationCountdown{margin:-6px auto 26px;}}
 #register-button{
@@ -561,7 +563,7 @@ footer{
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
         </button>
       </a>
-      <a id="rulebookLink" download="" hidden="" href="Ideathon-2025-Rulebook.pdf" class="">
+      <a id="rulebookLink" href="https://drive.google.com/file/d/1PezODDAdLBZJBtWzJCr66LadbEA3tjZ9/view" class="">
         <button id="veiw-button" class="">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 6h10"></path><path d="M6 10h10"></path></svg>
           <span id="view-button-text" class="">View Rulebook</span>
@@ -870,7 +872,7 @@ footer{
     "tagline": "Collaborate, innovate, and launch solutions to real problems with mentors, judges, and innovators from across India.",
     "registerText": "Register Now",
     "rulebookText": "View Rulebook",
-    "rulebookUrl": "Ideathon-2025-Rulebook.pdf"
+    "rulebookUrl": "https://drive.google.com/file/d/1PezODDAdLBZJBtWzJCr66LadbEA3tjZ9/view"
   },
   "about": {
     "title": "A National platform for real ideas",
