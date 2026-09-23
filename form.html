@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ideathon 2026 Registration</title>
+
+  <!-- Standard icon library -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    :root {
+      --primary: #111827;
+      --muted: #667085;
+      --border: #d0d5dd;
+      --bg: #f6f7f9;
+      --white: #ffffff;
+      --danger: #d92d20;
+      --success: #027a48;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--primary);
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 48px 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: var(--primary);
+      color: white;
+      border-radius: 14px 14px 0 0;
+      padding: 34px 36px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 30px;
+      line-height: 1.2;
+      letter-spacing: -.02em;
+    }
+
+    .intro {
+      margin: 0;
+      max-width: 620px;
+      color: #d1d5db;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .form-card {
+      background: var(--white);
+      padding: 36px;
+      border: 1px solid #e4e7ec;
+      border-top: 0;
+      border-radius: 0 0 14px 14px;
+      box-shadow: 0 8px 30px rgba(16, 24, 40, .06);
+    }
+
+    .section {
+      padding-bottom: 30px;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #eaecf0;
+    }
+
+    .section:last-of-type {
+      border-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .section-title {
+      margin: 0 0 5px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .section-description {
+      margin: 0 0 22px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .grid .field {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .required {
+      color: var(--danger);
+      margin-left: 2px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: white;
+      padding: 0 13px;
+      font: inherit;
+      font-size: 14px;
+      color: #101828;
+      outline: none;
+      transition: border-color .15s, box-shadow .15s;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #667085;
+      box-shadow: 0 0 0 3px rgba(16, 24, 40, .08);
+    }
+
+    input.invalid,
+    select.invalid {
+      border-color: var(--danger);
+    }
+
+    .help {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .error {
+      display: none;
+      margin-top: 6px;
+      color: var(--danger);
+      font-size: 12px;
+    }
+
+    .field.has-error .error {
+      display: block;
+    }
+
+    .member-field.hidden {
+      display: none;
+    }
+
+    .upload {
+      border: 1.5px dashed #98a2b3;
+      border-radius: 10px;
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+    }
+
+    .upload.hidden {
+      display: none;
+    }
+
+    .upload:hover,
+    .upload.dragover {
+      border-color: #344054;
+      background: #f9fafb;
+    }
+
+    .upload-icon {
+      width: 42px;
+      height: 42px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      background: #f2f4f7;
+      display: grid;
+      place-items: center;
+      color: #344054;
+      font-size: 17px;
+    }
+
+    .upload-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .upload-subtitle {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    #paymentProof {
+      display: none;
+    }
+
+    .file-preview {
+      display: none;
+      margin-top: 0;
+      padding: 12px 14px;
+      border: 1px solid #eaecf0;
+      border-radius: 8px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .file-preview.show {
+      display: flex;
+    }
+
+    .file-info {
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .file-info i {
+      color: #475467;
+    }
+
+    .file-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 13px;
+    }
+
+    .remove-file {
+      border: 0;
+      background: transparent;
+      color: #667085;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .submit-row {
+      margin-top: 28px;
+    }
+
+    .submit {
+      width: 100%;
+      height: 48px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--primary);
+      color: white;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+
+    .submit:hover { opacity: .9; }
+    .submit:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    .status {
+      display: none;
+      margin-top: 18px;
+      padding: 13px 15px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .status.show { display: block; }
+    .status.error-status {
+      color: #b42318;
+      background: #fef3f2;
+      border: 1px solid #fecdca;
+    }
+
+    .success {
+      display: none;
+      text-align: center;
+      padding: 55px 20px;
+    }
+
+    .success.show { display: block; }
+
+    .success-icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: #ecfdf3;
+      color: var(--success);
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+    }
+
+    .success h2 {
+      margin: 0 0 9px;
+      font-size: 24px;
+    }
+
+    .success p {
+      margin: 0 auto;
+      max-width: 500px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .registration-id {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 18px;
+      border: 1px solid #d0d5dd;
+      border-radius: 8px;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      text-align: center;
+      color: #98a2b3;
+      font-size: 12px;
+    }
+
+    /* PAYMENT INSTRUCTIONS & MODAL */
+    .payment-instructions-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 22px 24px;
+      margin-bottom: 24px;
+      position: relative;
+    }
+
+    .payment-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .payment-step-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: #0369a1;
+      background: #e0f2fe;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .payment-fee-badge {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      background: #f1f5f9;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .payment-instructions-card h3 {
+      margin: 0 0 6px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .payment-instructions-card p.card-subtext {
+      margin: 0 0 14px;
+      color: #475467;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .quick-guide-list {
+      margin: 0 0 16px;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .quick-guide-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: #334155;
+      line-height: 1.45;
+    }
+
+    .quick-guide-num {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #111827;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .fields-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .field-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 4px 9px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .field-tag.highlight {
+      background: #fff7ed;
+      border-color: #fdba74;
+      color: #9a3412;
+    }
+
+    .copy-btn {
+      border: none;
+      background: transparent;
+      color: #ea580c;
+      cursor: pointer;
+      padding: 2px 4px;
+      font-size: 11px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: background .15s;
+    }
+
+    .copy-btn:hover {
+      background: #ffedd5;
+    }
+
+    .payment-action-buttons {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .btn-pay-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .15s, transform .15s;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, .25);
+    }
+
+    .btn-pay-link:hover {
+      background: #0369a1;
+      transform: translateY(-1px);
+      color: #ffffff;
+    }
+
+    .btn-guide-modal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+    }
+
+    .btn-guide-modal:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    /* PAYMENT GUIDE MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .25s ease, visibility .25s ease;
+    }
+
+    .modal-overlay.is-active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-container {
+      background: #ffffff;
+      border-radius: 14px;
+      max-width: 620px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.25);
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+      transform: translateY(16px) scale(0.98);
+      transition: transform .25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-overlay.is-active .modal-container {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      background: #0f172a;
+      color: #ffffff;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .modal-header-content h3 {
+      margin: 0 0 4px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .modal-header-content p {
+      margin: 0;
+      font-size: 13px;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+
+    .modal-close-btn {
+      border: none;
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      transition: background .15s;
+      flex-shrink: 0;
+    }
+
+    .modal-close-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+    }
+
+    .modal-detail-step {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .modal-detail-step:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .modal-step-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: #0f172a;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 13px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .modal-step-content {
+      flex: 1;
+    }
+
+    .modal-step-content h4 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .modal-step-content p {
+      margin: 0 0 8px;
+      font-size: 13px;
+      color: #475467;
+      line-height: 1.5;
+    }
+
+    .fields-guide-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+      font-size: 12.5px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .fields-guide-table th {
+      background: #f8fafc;
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 600;
+      color: #475467;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .fields-guide-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+    }
+
+    .fields-guide-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .modal-footer .btn-secondary {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #475467;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .modal-footer .btn-secondary:hover {
+      background: #f1f5f9;
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 20px 12px; }
+      .header { padding: 28px 22px; }
+      .form-card { padding: 26px 20px; }
+      .grid { grid-template-columns: 1fr; gap: 0; }
+      h1 { font-size: 25px; }
+      .payment-action-buttons { flex-direction: column; align-items: stretch; }
+      .btn-pay-link, .btn-guide-modal { width: 100%; text-align: center; }
+      .modal-container { max-height: 94vh; }
+      .modal-header { padding: 18px 20px; }
+      .modal-body { padding: 18px 20px; }
+      .modal-footer { padding: 14px 20px; flex-direction: column-reverse; }
+      .modal-footer .btn-secondary, .modal-footer .btn-pay-link { width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="container">
+
+      <header class="header">
+        <div class="brand">
+          <!-- <span class="brand-mark"><i class="fa-solid fa-microchip"></i></span> -->
+          AICTE IDEA LAB
+        </div>
+
+        <h1>Ideathon 2026 Registration</h1>
+
+        <p class="intro">
+          Register your team for the National-Level AICTE IDEA LAB
+          Ideathon at New Horizon College of Engineering.
+        </p>
+      </header>
+
+      <section class="form-card">
+
+        <form id="registrationForm" novalidate>
+
+          <!-- TEAM LEADER -->
+          <div class="section">
+            <h2 class="section-title">Team Leader</h2>
+            <p class="section-description">
+              Enter the primary contact details for your team.
+            </p>
+
+            <div class="grid">
+
+              <div class="field" data-field="leaderName">
+                <label for="leaderName">
+                  Team Leader Full Name <span class="required">*</span>
+                </label>
+                <input id="leaderName" name="leaderName" type="text"
+                       autocomplete="name" required>
+                <div class="error">Please enter the team leader's full name.</div>
+              </div>
+
+              <div class="field" data-field="leaderEmail">
+                <label for="leaderEmail">
+                  Team Leader Email Address <span class="required">*</span>
+                </label>
+                <input id="leaderEmail" name="leaderEmail" type="email"
+                       autocomplete="email" required>
+                <div class="error">Please enter a valid email address.</div>
+              </div>
+
+              <div class="field" data-field="leaderPhone">
+                <label for="leaderPhone">
+                  Team Leader Phone Number <span class="required">*</span>
+                </label>
+                <input id="leaderPhone" name="leaderPhone" type="tel"
+                       inputmode="numeric" autocomplete="tel" required>
+                <div class="error">Please enter a valid phone number.</div>
+              </div>
+
+              <div class="field" data-field="college">
+                <label for="college">
+                  College Name <span class="required">*</span>
+                </label>
+                <input id="college" name="college" type="text" required>
+                <div class="error">Please enter your college name.</div>
+              </div>
+
+              <div class="field" data-field="degreeProgram">
+                <label for="degreeProgram">
+                  Degree Program <span class="required">*</span>
+                </label>
+                <select id="degreeProgram" name="degreeProgram" required>
+                  <option value="">Select degree program</option>
+                  <option value="B.E. / B.Tech">B.E. / B.Tech</option>
+                  <option value="M.E. / M.Tech">M.E. / M.Tech</option>
+                  <option value="BCA / MCA">BCA / MCA</option>
+                  <option value="Other">Other</option>
+                </select>
+                <div class="error">Please select a degree program.</div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- TEAM -->
+          <div class="section">
+            <h2 class="section-title">Team Details</h2>
+            <p class="section-description">
+              Provide your team information. The additional member fields
+              will appear according to the selected team size.
+            </p>
+
+            <div class="grid">
+
+              <div class="field" data-field="teamSize">
+                <label for="teamSize">
+                  Team Size <span class="required">*</span>
+                </label>
+
+                <select id="teamSize" name="teamSize" required>
+                  <option value="">Select team size</option>
+                  <option value="1">1 Member</option>
+                  <option value="2">2 Members</option>
+                  <option value="3">3 Members</option>
+                  <option value="4">4 Members</option>
+                  <option value="5">5 Members</option>
+                  <option value="6">6 Members</option>
+                </select>
+
+                <div class="error">Please select your team size.</div>
+              </div>
+
+              <div class="field" data-field="teamName">
+                <label for="teamName">
+                  Team Name <span class="required">*</span>
+                </label>
+                <input id="teamName" name="teamName" type="text" required>
+                <div class="error">Please enter your team name.</div>
+              </div>
+
+            </div>
+
+            <div id="memberFields">
+
+              <div class="field member-field hidden" data-member="2">
+                <label for="member2">Team Member 2 Full Name <span class="required">*</span></label>
+                <input id="member2" type="text">
+                <div class="error">Please enter Member 2's full name.</div>
+              </div>
+
+              <div class="field member-field hidden" data-member="3">
+                <label for="member3">Team Member 3 Full Name <span class="required">*</span></label>
+                <input id="member3" type="text">
+                <div class="error">Please enter Member 3's full name.</div>
+              </div>
+
+              <div class="field member-field hidden" data-member="4">
+                <label for="member4">Team Member 4 Full Name <span class="required">*</span></label>
+                <input id="member4" type="text">
+                <div class="error">Please enter Member 4's full name.</div>
+              </div>
+
+              <div class="field member-field hidden" data-member="5">
+                <label for="member5">Team Member 5 Full Name <span class="required">*</span></label>
+                <input id="member5" type="text">
+                <div class="error">Please enter Member 5's full name.</div>
+              </div>
+
+              <div class="field member-field hidden" data-member="6">
+                <label for="member6">Team Member 6 Full Name <span class="required">*</span></label>
+                <input id="member6" type="text">
+                <div class="error">Please enter Member 6's full name.</div>
+              </div>
+
+            </div>
+          </div>
+
+
+          <!-- TRACK -->
+          <div class="section">
+            <h2 class="section-title">Innovation Track</h2>
+            <p class="section-description">
+              Select the track your team is participating in.
+            </p>
+
+            <div class="field" data-field="innovationTrack">
+              <label for="innovationTrack">
+                Select Innovation Track <span class="required">*</span>
+              </label>
+
+              <select id="innovationTrack" name="innovationTrack" required>
+                <option value="">Select innovation track</option>
+                <option value="FNT">FinTech</option>
+                <option value="SVT">Smart Vehicles & Transportation</option>
+                <option value="DMT">Disaster Management</option>
+                <option value="SEM">Sustainable Energy Management</option>
+                <option value="WFI">Workforce Innovation</option>
+              </select>
+
+              <div class="error">Please select an innovation track.</div>
+            </div>`
+          </div>
+
+
+          <!-- PAYMENT -->
+          <div class="section" style="padding-bottom: 0;">
+            <h2 class="section-title">Registration Fee & Payment Proof</h2>
+            <p class="section-description">
+              A registration fee of ₹600 per team is required. Follow the steps below to pay and upload your confirmation screenshot.
+            </p>
+
+            <!-- Step 1: Pay Fee Card -->
+            <div class="payment-instructions-card">
+              <div class="payment-header-row">
+                <span class="payment-step-badge">
+                  <i class="fa-solid fa-1"></i> Step 1: Payment Portal
+                </span>
+                <span class="payment-fee-badge">
+                  Registration Fee: <strong>₹600</strong>
+                </span>
+              </div>
+
+              <h3>Pay Registration Fee on EduQfix</h3>
+              <p class="card-subtext">
+                Click the button below to open the official EduQfix payment gateway and enter the required details:
+              </p>
+
+              <ul class="quick-guide-list">
+                <li class="quick-guide-item">
+                  <span class="quick-guide-num">1</span>
+                  <div>Click the payment button to open the EduQfix portal.</div>
+                </li>
+                <li class="quick-guide-item">
+                  <span class="quick-guide-num">2</span>
+                  <div>
+                    Fill in your details accurately:
+                    <div class="fields-tag-row">
+                      <!-- <span class="field-tag"><strong>USN:</strong> College USN / Roll No</span>
+                      <span class="field-tag"><strong>Name:</strong> Team Leader Name</span>
+                      <span class="field-tag"><strong>Course:</strong> Branch / Degree</span> -->
+                      <span class="field-tag highlight">
+                        <strong>Purpose:</strong> <code id="purposeTagInline">ideathon-2026</code>
+                        <button type="button" class="copy-btn" id="copyPurposeInline" title="Copy purpose to clipboard">
+                          <i class="fa-regular fa-copy"></i> Copy
+                        </button>
+                      </span>
+                      <span class="field-tag"><strong>Fee:</strong> ₹600</span>
+                    </div>
+                  </div>
+                </li>
+                <li class="quick-guide-item">
+                  <span class="quick-guide-num">3</span>
+                  <div>Proceed to payment and take a screenshot of the successful payment receipt.</div>
+                </li>
+              </ul>
+
+              <div class="payment-action-buttons">
+                <a href="https://forms.eduqfix.com/works/add" target="_blank" rel="noopener noreferrer" class="btn-pay-link">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Pay ₹600 via EduQfix Portal
+                </a>
+                <button type="button" class="btn-guide-modal" id="openPaymentGuideBtn">
+                  <i class="fa-solid fa-circle-info"></i> View Detailed Payment Guide
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2: Upload Proof -->
+            <div class="field" data-field="paymentProof">
+              <div class="payment-header-row" style="margin-bottom: 8px;">
+                <span class="payment-step-badge" style="background:#fef3f2; color:#b42318;">
+                  <i class="fa-solid fa-2"></i> Step 2: Upload Proof
+                </span>
+              </div>
+
+              <label>
+                Upload Payment Screenshot / Receipt <span class="required">*</span>
+              </label>
+
+              <div class="upload" id="uploadArea">
+                <div class="upload-icon">
+                  <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                </div>
+
+                <div class="upload-title">
+                  Click to upload or drag and drop
+                </div>
+
+                <div class="upload-subtitle">
+                  PDF, JPG or PNG · Maximum 10 MB
+                </div>
+
+                <input id="paymentProof"
+                       name="paymentProof"
+                       type="file"
+                       accept=".pdf,.jpg,.jpeg,.png">
+              </div>
+
+              <div class="file-preview" id="filePreview">
+                <div class="file-info">
+                  <i class="fa-regular fa-file"></i>
+                  <span class="file-name" id="fileName"></span>
+                </div>
+
+                <button type="button"
+                        class="remove-file"
+                        id="removeFile"
+                        aria-label="Remove file">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+              <p style="margin-top:8px; font-size:12px; color:#b42318; font-weight:500;">
+⚠️ Invalid or tampered payment proof will result in disqualification.
+</p>
+
+              <div class="error" id="fileError">
+                Please upload your payment proof.
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="submit-row">
+            <button class="submit" id="submitButton" type="submit">
+              Submit Registration
+            </button>
+
+            <div class="status error-status" id="status"></div>
+          </div>
+
+        </form>
+
+
+        <!-- SUCCESS -->
+        <div class="success" id="successScreen">
+
+          <div class="success-icon">
+            <i class="fa-solid fa-check"></i>
+          </div>
+
+          <h2>Registration Complete</h2>
+
+          <p>
+            Your Ideathon 2026 registration has been submitted successfully.
+            Please keep your registration ID for future reference.
+          </p>
+
+          <div class="registration-id" id="registrationId">
+            IDEA26-00000
+          </div>
+
+        </div>
+
+      </section>
+
+      <div class="footer-note">
+        AICTE IDEA LAB · New Horizon College of Engineering
+      </div>
+
+    </div>
+  </main>
+
+  <!-- PAYMENT GUIDE MODAL -->
+  <div class="modal-overlay" id="paymentGuideModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-header-content">
+          <h3 id="modalTitle"><i class="fa-solid fa-receipt" style="color: #38bdf8; margin-right: 8px;"></i>EduQfix Payment Guide</h3>
+          <p>Step-by-step instructions to pay the ₹600 Ideathon registration fee</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="closePaymentGuideBtn" aria-label="Close payment guide">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-detail-step">
+          <div class="modal-step-badge">1</div>
+          <div class="modal-step-content">
+            <h4>Open the Official Payment Link</h4>
+            <p>Click the link or button below to navigate to the official EduQfix payment gateway portal:</p>
+            <a href="https://forms.eduqfix.com/works/add" target="_blank" rel="noopener noreferrer" style="color: #0284c7; font-weight: 600; font-size: 13px; word-break: break-all;">
+              https://forms.eduqfix.com/works/add <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 11px;"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="modal-detail-step">
+          <div class="modal-step-badge">2</div>
+          <div class="modal-step-content">
+            <h4>Fill in Required Details on EduQfix</h4>
+            <p>Enter the following fields on the payment form:</p>
+            <table class="fields-guide-table">
+              <thead>
+                <tr>
+                  <th>Field</th>
+                  <th>Value to Enter</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>USN</strong></td>
+                  <td>Your University Seat Number / College Roll Number</td>
+                </tr>
+                <tr>
+                  <td><strong>Name</strong></td>
+                  <td>Team Leader / Participant Full Name</td>
+                </tr>
+                <tr>
+                  <td><strong>Course</strong></td>
+                  <td>Your Degree & Branch (e.g., B.E. CSE, AIML, etc.)</td>
+                </tr>
+                <tr>
+                  <td><strong>Purpose</strong></td>
+                  <td>
+                    <span style="display: inline-flex; align-items: center; gap: 6px;">
+                      <code style="background: #fff7ed; color: #c2410c; padding: 2px 6px; border-radius: 4px; font-weight: 700;">ideathon-2026</code>
+                      <button type="button" class="copy-btn" id="copyPurposeModal">
+                        <i class="fa-regular fa-copy"></i> Copy
+                      </button>
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Registration Fee</strong></td>
+                  <td><strong style="color: #047857;">₹600</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="modal-detail-step">
+          <div class="modal-step-badge">3</div>
+          <div class="modal-step-content">
+            <h4>Proceed to Payment</h4>
+            <p>Click <strong>"Proceed to Payment"</strong> and select your preferred payment mode (UPI / Google Pay / PhonePe / Paytm, Credit/Debit Card, or Net Banking) to complete the ₹600 payment.</p>
+          </div>
+        </div>
+
+        <div class="modal-detail-step">
+          <div class="modal-step-badge">4</div>
+          <div class="modal-step-content">
+            <h4>Save Screenshot / Receipt</h4>
+            <p>After successful payment, take a clear screenshot of the confirmation screen or download the PDF receipt. Ensure the Transaction ID / Ref No. is visible.</p>
+          </div>
+        </div>
+
+        <div class="modal-detail-step">
+          <div class="modal-step-badge">5</div>
+          <div class="modal-step-content">
+            <h4>Submit Proof in Registration Form</h4>
+            <p>Return to this registration form, attach your screenshot under <strong>"Step 2: Upload Proof"</strong>, and click <strong>Submit Registration</strong>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" id="closePaymentGuideFooterBtn">Close Guide</button>
+        <a href="https://forms.eduqfix.com/works/add" target="_blank" rel="noopener noreferrer" class="btn-pay-link">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Open EduQfix Portal
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /************************************************
+     * CONFIGURATION
+     ************************************************/
+
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbx27lsQa0Te73fjQf_y75AKKWFEFJFR8u9HihOGy_RNptlI0EaO6R4FM_JrgW6SNT-M3Q/exec";
+
+    const MAX_FILE_SIZE =
+      10 * 1024 * 1024;
+
+    const ALLOWED_TYPES = [
+      "application/pdf",
+      "image/jpeg",
+      "image/png"
+    ];
+
+
+    /************************************************
+     * ELEMENTS
+     ************************************************/
+
+    const form =
+      document.getElementById("registrationForm");
+
+    const teamSize =
+      document.getElementById("teamSize");
+
+    const uploadArea =
+      document.getElementById("uploadArea");
+
+    const fileInput =
+      document.getElementById("paymentProof");
+
+    const filePreview =
+      document.getElementById("filePreview");
+
+    const fileName =
+      document.getElementById("fileName");
+
+    const removeFile =
+      document.getElementById("removeFile");
+
+    const submitButton =
+      document.getElementById("submitButton");
+
+    const statusBox =
+      document.getElementById("status");
+
+    const ERROR_MESSAGES = {
+      DUPLICATE_TEAM_LEADER:
+        "This team leader has already registered a team using this email or phone number.",
+      DUPLICATE_REGISTRATION:
+        "This team leader has already registered a team using this email or phone number.",
+      "A registration already exists.":
+        "This team leader has already registered a team using this email or phone number.",
+      INVALID_REQUEST:
+        "The registration details could not be processed. Please check your entries and try again.",
+      INVALID_TEAM_LEADER:
+        "Please enter valid team leader details.",
+      INVALID_EMAIL:
+        "Please enter a valid email address.",
+      INVALID_PHONE:
+        "Please enter a valid phone number.",
+      INVALID_TEAM_SIZE:
+        "Please select a valid team size.",
+      INVALID_TEAM_MEMBERS:
+        "Please check the team member details and try again.",
+      INVALID_TEAM_MEMBER:
+        "Please enter all required team member names.",
+      PAYMENT_PROOF_REQUIRED:
+        "Please upload your payment proof.",
+      INVALID_RESPONSE:
+        "The server returned an invalid response. Please try again.",
+      SERVER_ERROR:
+        "The registration service is unavailable right now. Please try again later.",
+      REGISTRATION_FAILED:
+        "Unable to complete the registration. Please check your details and try again."
+    };
+
+
+    /************************************************
+     * TEAM MEMBER VISIBILITY
+     ************************************************/
+
+    teamSize.addEventListener("change", updateMembers);
+
+    function updateMembers() {
+
+      const size =
+        Number(teamSize.value || 0);
+
+      for (let i = 2; i <= 6; i++) {
+
+        const wrapper =
+          document.querySelector(
+            `[data-member="${i}"]`
+          );
+
+        const input =
+          document.getElementById(`member${i}`);
+
+        if (!wrapper || !input) continue;
+
+        const visible =
+          i <= size;
+
+        wrapper.classList.toggle(
+          "hidden",
+          !visible
+        );
+
+        input.required = visible;
+
+        if (!visible) {
+          input.value = "";
+          clearFieldError(wrapper);
+        }
+      }
+    }
+
+
+    /************************************************
+     * FILE UPLOAD
+     ************************************************/
+
+    uploadArea.addEventListener(
+      "click",
+      () => fileInput.click()
+    );
+
+    fileInput.addEventListener(
+      "change",
+      () => {
+
+        if (fileInput.files[0]) {
+          handleFile(fileInput.files[0]);
+        }
+      }
+    );
+
+
+    uploadArea.addEventListener(
+      "dragover",
+      event => {
+
+        event.preventDefault();
+
+        uploadArea.classList.add(
+          "dragover"
+        );
+      }
+    );
+
+
+    uploadArea.addEventListener(
+      "dragleave",
+      () => {
+
+        uploadArea.classList.remove(
+          "dragover"
+        );
+      }
+    );
+
+
+    uploadArea.addEventListener(
+      "drop",
+      event => {
+
+        event.preventDefault();
+
+        uploadArea.classList.remove(
+          "dragover"
+        );
+
+        const file =
+          event.dataTransfer.files[0];
+
+        if (!file) return;
+
+        const transfer =
+          new DataTransfer();
+
+        transfer.items.add(file);
+
+        fileInput.files =
+          transfer.files;
+
+        handleFile(file);
+      }
+    );
+
+
+    removeFile.addEventListener(
+      "click",
+      event => {
+
+        event.stopPropagation();
+
+        fileInput.value = "";
+
+        uploadArea.classList.remove(
+          "hidden"
+        );
+
+        filePreview.classList.remove(
+          "show"
+        );
+      }
+    );
+
+
+    function handleFile(file) {
+
+      const validType =
+        ALLOWED_TYPES.includes(file.type);
+
+      const validSize =
+        file.size <= MAX_FILE_SIZE;
+
+      if (!validType) {
+
+        showStatus(
+          "Invalid file type. Please upload a PDF, JPG, or PNG.",
+          true
+        );
+
+        fileInput.value = "";
+
+        return;
+      }
+
+      if (!validSize) {
+
+        showStatus(
+          "File is too large. Maximum size is 10 MB.",
+          true
+        );
+
+        fileInput.value = "";
+
+        return;
+      }
+
+      fileName.textContent =
+        file.name;
+
+      filePreview.classList.add(
+        "show"
+      );
+
+      uploadArea.classList.add(
+        "hidden"
+      );
+
+      clearStatus();
+    }
+
+
+    /************************************************
+     * FORM SUBMISSION
+     ************************************************/
+
+    form.addEventListener(
+      "submit",
+      async event => {
+
+        event.preventDefault();
+
+        clearStatus();
+
+        if (!validateForm()) {
+          return;
+        }
+
+        submitButton.disabled = true;
+
+        submitButton.innerHTML =
+          '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+
+
+        try {
+
+          const file =
+            fileInput.files[0];
+
+          const base64 =
+            await fileToBase64(file);
+
+
+          const size =
+            Number(teamSize.value);
+
+          const members = [];
+
+          for (let i = 2; i <= size; i++) {
+
+            members.push(
+              document
+                .getElementById(`member${i}`)
+                .value
+                .trim()
+            );
+          }
+
+
+          const payload = {
+
+            teamLeader: {
+
+              fullName:
+                document
+                  .getElementById("leaderName")
+                  .value
+                  .trim(),
+
+              email:
+                document
+                  .getElementById("leaderEmail")
+                  .value
+                  .trim(),
+
+              phone:
+                document
+                  .getElementById("leaderPhone")
+                  .value
+                  .trim()
+            },
+
+            college:
+              document
+                .getElementById("college")
+                .value
+                .trim(),
+
+            degreeProgram:
+              document
+                .getElementById("degreeProgram")
+                .value,
+
+            teamSize: size,
+
+            teamName:
+              document
+                .getElementById("teamName")
+                .value
+                .trim(),
+
+            members,
+
+            innovationTrack:
+              document
+                .getElementById("innovationTrack")
+                .value,
+
+            paymentProof: {
+
+              name: file.name,
+
+              mimeType: file.type,
+
+              base64
+
+            }
+          };
+
+
+          const response =
+            await fetch(
+              API_URL,
+              {
+                method: "POST",
+
+                headers: {
+                  "Content-Type":
+                    "text/plain;charset=utf-8"
+                },
+
+                body:
+                  JSON.stringify(payload)
+              }
+            );
+
+
+          let result;
+
+          try {
+            result = await response.json();
+          } catch {
+            throw new Error("INVALID_RESPONSE");
+          }
+
+          if (!response.ok) {
+            throw new Error(
+              result?.error ||
+              "SERVER_ERROR"
+            );
+          }
+
+          if (!result.success) {
+            throw new Error(
+              result.error ||
+              "REGISTRATION_FAILED"
+            );
+          }
+
+          if (!result.registrationId) {
+            throw new Error("REGISTRATION_FAILED");
+          }
+
+          showSuccess(
+            result.registrationId
+          );
+
+
+        } catch (error) {
+
+          showStatus(
+            getFriendlyErrorMessage(error),
+            true
+          );
+
+        } finally {
+
+          submitButton.disabled = false;
+
+          submitButton.textContent =
+            "Submit Registration";
+        }
+
+      }
+    );
+
+
+    /************************************************
+     * VALIDATION
+     ************************************************/
+
+    function validateForm() {
+
+      let valid = true;
+
+      const requiredInputs =
+        form.querySelectorAll(
+          "input[required], select[required]"
+        );
+
+
+      requiredInputs.forEach(input => {
+
+        const wrapper =
+          input.closest(".field");
+
+        if (
+          wrapper &&
+          wrapper.classList.contains("hidden")
+        ) {
+          return;
+        }
+
+
+        let fieldValid =
+          input.value.trim() !== "";
+
+
+        if (
+          input.type === "email" &&
+          fieldValid
+        ) {
+
+          fieldValid =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+              .test(input.value.trim());
+        }
+
+
+        if (
+          input.id === "leaderPhone" &&
+          fieldValid
+        ) {
+
+          const digits =
+            input.value.replace(/\D/g, "");
+
+          fieldValid =
+            digits.length >= 10 &&
+            digits.length <= 15;
+        }
+
+
+        setFieldError(
+          wrapper,
+          !fieldValid
+        );
+
+
+        if (!fieldValid) {
+          valid = false;
+        }
+      });
+
+
+      const size =
+        Number(teamSize.value);
+
+      const members = [];
+
+      if (size >= 2) {
+
+        for (
+          let i = 2;
+          i <= size;
+          i++
+        ) {
+
+          const input =
+            document.getElementById(
+              `member${i}`
+            );
+
+          if (input.value.trim()) {
+            members.push(
+              input.value.trim()
+            );
+          }
+        }
+      }
+
+
+      if (
+        size &&
+        members.length !== size - 1
+      ) {
+
+        valid = false;
+
+        showStatus(
+          "Please enter all required team member names.",
+          true
+        );
+      }
+
+
+      const file =
+        fileInput.files[0];
+
+      if (!file) {
+
+        valid = false;
+
+        document
+          .querySelector(
+            '[data-field="paymentProof"]'
+          )
+          .classList.add("has-error");
+      }
+
+
+      if (!valid && !statusBox.textContent) {
+
+        showStatus(
+          "Please complete all required fields.",
+          true
+        );
+      }
+
+
+      return valid;
+    }
+
+
+    /************************************************
+     * HELPERS
+     ************************************************/
+
+    function getFriendlyErrorMessage(error) {
+
+      const errorKey =
+        error instanceof Error ?
+          error.message :
+          String(error || "");
+
+      return ERROR_MESSAGES[errorKey] ||
+        "Unable to submit the registration. Please check your connection and try again.";
+    }
+
+    function setFieldError(
+      wrapper,
+      hasError
+    ) {
+
+      if (!wrapper) return;
+
+      wrapper.classList.toggle(
+        "has-error",
+        hasError
+      );
+
+      const input =
+        wrapper.querySelector(
+          "input, select"
+        );
+
+      if (input) {
+
+        input.classList.toggle(
+          "invalid",
+          hasError
+        );
+      }
+    }
+
+
+    function clearFieldError(wrapper) {
+
+      setFieldError(
+        wrapper,
+        false
+      );
+    }
+
+
+    function fileToBase64(file) {
+
+      return new Promise(
+        (resolve, reject) => {
+
+          const reader =
+            new FileReader();
+
+          reader.onload = () => {
+
+            const result =
+              String(reader.result);
+
+            resolve(
+              result.split(",")[1]
+            );
+          };
+
+          reader.onerror =
+            reject;
+
+          reader.readAsDataURL(file);
+        }
+      );
+    }
+
+
+    function showStatus(
+      message,
+      isError = true
+    ) {
+
+      statusBox.textContent =
+        message;
+
+      statusBox.className =
+        "status show";
+
+      if (isError) {
+        statusBox.classList.add(
+          "error-status"
+        );
+      }
+    }
+
+
+    function clearStatus() {
+
+      statusBox.textContent = "";
+
+      statusBox.className =
+        "status";
+    }
+
+
+    function showSuccess(
+      registrationId
+    ) {
+
+      form.style.display = "none";
+
+      document
+        .getElementById("successScreen")
+        .classList.add("show");
+
+      document
+        .getElementById("registrationId")
+        .textContent =
+        registrationId;
+    }
+
+
+    /************************************************
+     * PAYMENT GUIDE MODAL & COPY ACTIONS
+     ************************************************/
+
+    const paymentModal = document.getElementById("paymentGuideModal");
+    const openPaymentGuideBtn = document.getElementById("openPaymentGuideBtn");
+    const closePaymentGuideBtn = document.getElementById("closePaymentGuideBtn");
+    const closePaymentGuideFooterBtn = document.getElementById("closePaymentGuideFooterBtn");
+    const copyPurposeInline = document.getElementById("copyPurposeInline");
+    const copyPurposeModal = document.getElementById("copyPurposeModal");
+
+    function openModal() {
+      if (!paymentModal) return;
+      paymentModal.classList.add("is-active");
+      document.body.style.overflow = "hidden";
+      if (closePaymentGuideBtn) closePaymentGuideBtn.focus();
+    }
+
+    function closeModal() {
+      if (!paymentModal) return;
+      paymentModal.classList.remove("is-active");
+      document.body.style.overflow = "";
+      if (openPaymentGuideBtn) openPaymentGuideBtn.focus();
+    }
+
+    if (openPaymentGuideBtn) openPaymentGuideBtn.addEventListener("click", openModal);
+    if (closePaymentGuideBtn) closePaymentGuideBtn.addEventListener("click", closeModal);
+    if (closePaymentGuideFooterBtn) closePaymentGuideFooterBtn.addEventListener("click", closeModal);
+
+    if (paymentModal) {
+      paymentModal.addEventListener("click", event => {
+        if (event.target === paymentModal) closeModal();
+      });
+    }
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && paymentModal && paymentModal.classList.contains("is-active")) {
+        closeModal();
+      }
+    });
+
+    function copyPurpose(btn) {
+      const textToCopy = "ideathon-2026";
+      const setCopied = () => {
+        const originalHtml = btn.innerHTML;
+        btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        setTimeout(() => {
+          btn.innerHTML = originalHtml;
+        }, 2000);
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(textToCopy).then(setCopied).catch(() => {
+          fallbackCopy();
+        });
+      } else {
+        fallbackCopy();
+      }
+
+      function fallbackCopy() {
+        const textarea = document.createElement("textarea");
+        textarea.value = textToCopy;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        try {
+          document.execCommand("copy");
+          setCopied();
+        } catch (e) {
+          console.error("Copy failed", e);
+        }
+        document.body.removeChild(textarea);
+      }
+    }
+
+    if (copyPurposeInline) {
+      copyPurposeInline.addEventListener("click", () => copyPurpose(copyPurposeInline));
+    }
+    if (copyPurposeModal) {
+      copyPurposeModal.addEventListener("click", () => copyPurpose(copyPurposeModal));
+    }
+  </script>
+</body>
+</html>
