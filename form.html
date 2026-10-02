@@ -873,6 +873,26 @@
                 <div class="error">Please enter your team name.</div>
               </div>
 
+              <div class="field" data-field="state">
+                <label for="state">
+                  State <span class="required">*</span>
+                </label>
+                <select id="state" name="state" required>
+                  <option value="">Select State</option>
+                </select>
+                <div class="error">Please select a state.</div>
+              </div>
+
+              <div class="field" data-field="city">
+                <label for="city">
+                  City <span class="required">*</span>
+                </label>
+                <select id="city" name="city" disabled required>
+                  <option value="">Select City</option>
+                </select>
+                <div class="error">Please select a city.</div>
+              </div>
+
             </div>
 
             <div id="memberFields">
@@ -1553,6 +1573,16 @@
                 .getElementById("innovationTrack")
                 .value,
 
+            state:
+              document
+                .getElementById("state")
+                .value,
+
+            city:
+              document
+                .getElementById("city")
+                .value,
+
             paymentProof: {
 
               name: file.name,
@@ -1975,6 +2005,40 @@
     if (copyPurposeModal) {
       copyPurposeModal.addEventListener("click", () => copyPurpose(copyPurposeModal));
     }
+
+    const stateSelect = document.getElementById("state");
+    const citySelect = document.getElementById("city");
+
+    import("https://cdn.jsdelivr.net/npm/country-state-city@3.2.1/+esm").then(({ State, City }) => {
+      const states = State.getStatesOfCountry("IN");
+
+      states.forEach(state => {
+        const option = document.createElement("option");
+        option.value = state.isoCode;
+        option.textContent = state.name;
+        stateSelect.appendChild(option);
+      });
+
+      stateSelect.addEventListener("change", () => {
+        const stateCode = stateSelect.value;
+        citySelect.innerHTML = '<option value="">Select City</option>';
+
+        if (!stateCode) {
+          citySelect.disabled = true;
+          return;
+        }
+
+        const cities = City.getCitiesOfState("IN", stateCode);
+        cities.forEach(city => {
+          const option = document.createElement("option");
+          option.value = city.name;
+          option.textContent = city.name;
+          citySelect.appendChild(option);
+        });
+
+        citySelect.disabled = false;
+      });
+    });
   </script>
 </body>
 </html>
